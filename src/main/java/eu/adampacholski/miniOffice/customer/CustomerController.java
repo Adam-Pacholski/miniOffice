@@ -31,14 +31,14 @@ public class CustomerController {
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/edit/{customerId}/{countryId}")
+    @PutMapping(path = "/edit/{customer_id}/{country_id}")
     public ResponseEntity<Customer> editCountry(
-            @PathVariable("customerId") Long customerId,
-            @PathVariable("countryId") Long countryId,
+            @PathVariable("customer_id") Long customer_id,
+            @PathVariable("country_id") Long country_id,
             @RequestBody Customer customer
     ){
-        Customer editCountry = customerService.updateCustomer(countryId, customer, customerId);
-        return new ResponseEntity<>(editCountry, HttpStatus.OK);
+        Customer editCustomer = customerService.updateCustomer(customer_id, country_id, customer);
+        return new ResponseEntity<>(editCustomer, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/delete/{id}")

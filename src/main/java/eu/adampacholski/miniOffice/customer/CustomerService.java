@@ -32,7 +32,7 @@ public class CustomerService {
        return customerRepo.save(customer);
     }
 
-    public Customer updateCustomer(Long countryId, Customer customer, Long customerId){
+    public Customer updateCustomer(Long customerId , Long countryId, Customer customer){
         Customer oldCustomer = customerRepo.findById(customerId).get();
         Optional<Customer> customerByName = customerRepo.findCustomerByName(customer.getName());
         if(customerByName.isPresent())
@@ -46,7 +46,7 @@ public class CustomerService {
         oldCustomer.setPhone(customer.getPhone());
         oldCustomer.setCountries(countriesRepo.findCountriesById(countryId).get());
 
-        return customerRepo.save(customer);
+        return customerRepo.save(oldCustomer);
     }
 
     public void deleteCustomer(Long id){
