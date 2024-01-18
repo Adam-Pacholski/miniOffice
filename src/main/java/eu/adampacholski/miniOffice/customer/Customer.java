@@ -12,12 +12,12 @@ public class Customer {
     @Id
     @SequenceGenerator(
             name="customer_sec",
-            sequenceName = "countries_sec",
+            sequenceName = "customer_sec",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "countries_sec"
+            generator = "customer_sec"
     )
     @Column(
             name = "id",
@@ -72,9 +72,8 @@ public class Customer {
 
     public Customer() {
     }
+    public Customer(String name, String street, String postCode, String city, String email, String phone, String customerType) {
 
-    public Customer(Long id, String name, String street, String postCode, String city, String email, String phone, String customerType, Countries countries) {
-        this.id = id;
         this.name = name;
         this.street = street;
         this.postCode = postCode;
@@ -82,7 +81,6 @@ public class Customer {
         this.email = email;
         this.phone = phone;
         this.customerType = customerType;
-        this.countries = countries;
     }
 
     public Countries getCountries() {

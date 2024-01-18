@@ -1,11 +1,12 @@
 package eu.adampacholski.miniOffice.customer;
 
 import eu.adampacholski.miniOffice.Exception.NotFoundException;
-import eu.adampacholski.miniOffice.countries.Countries;
 import eu.adampacholski.miniOffice.countries.CountriesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,11 +20,39 @@ public class CustomerService {
         this.countriesRepo = countriesRepo;
     }
 
-    public Customer addCustomer(Long countryId, Customer customer){
+    public List<Customer> getCustomers(){
+        return customerRepo.findAll(Sort.by(Sort.Direction.ASC, "name"));
+    }
+
+    public Customer addCustomer(Customer customer, Long countryId){
         Optional<Customer> customerByName = customerRepo.findCustomerByName(customer.getName());
         if(customerByName.isPresent())
             throw new NotFoundException("Podana nazwa już istnieje");
         customer.setCountries(countriesRepo.findCountriesById(countryId).get());
        return customerRepo.save(customer);
+    }
+
+    public Customer updateCustomer(Long countryId, Customer customer, Long customerId){
+        Customer oldCustomer = customerRepo.findById(customerId).get();
+        Optional<Customer> customerByName = customerRepo.findCustomerByName(customer.getName());
+        if(customerByName.isPresent())
+            throw new NotFoundException("Podana nazwa już istnieje");
+
+        oldCustomer.setName(customer.getName());
+        oldCustomer.setStreet(customer.getStreet());
+        oldCustomer.setPostCode(customer.getPostCode());
+        oldCustomer.setCity(customer.getCity());
+        oldCustomer.setPhone(customer.getPhone());
+        oldCustomer.setPhone(customer.getPhone());
+        oldCustomer.setCountries(countriesRepo.findCountriesById(countryId).get());
+
+        return customerRepo.save(customer);
+    }
+
+    public void deleteCustomer(Long id){
+        boolean exist = customerRepo.existsById(id);
+        if(!exist)
+            throw new NotFoundException("W bazie nie ma klienta o id: "+id);
+        customerRepo.deleteById(id);
     }
 }
