@@ -24,6 +24,7 @@ public class CustomerService {
         return customerRepo.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
+    public Customer getCustomerById(Long id){return customerRepo.findById(id).get();}
     public Customer addCustomer(Customer customer, Long countryId){
         Optional<Customer> customerByName = customerRepo.findCustomerByName(customer.getName());
         if(customerByName.isPresent())

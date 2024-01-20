@@ -23,6 +23,14 @@ public class CustomerController {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
+    @GetMapping("/byId/{id}")
+    public ResponseEntity<Customer> getCustomers(
+            @PathVariable("id") Long id
+    ){
+        Customer customers = customerService.getCustomerById(id);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
     @PostMapping("/add/{countryId}")
     public ResponseEntity<Customer> addCustomer(
             @PathVariable("countryId") Long countryId,
