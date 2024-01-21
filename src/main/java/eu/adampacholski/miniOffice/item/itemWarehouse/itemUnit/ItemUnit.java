@@ -1,34 +1,40 @@
-package eu.adampacholski.miniOffice.itemCategory;
+package eu.adampacholski.miniOffice.item.itemWarehouse.itemUnit;
 
 import jakarta.persistence.*;
 
-@Entity(name = "ItemCategory")
-@Table(name = "item_category", uniqueConstraints = {
-        @UniqueConstraint(name = "item_name_uniq", columnNames = "name")
+@Entity(name = "ItemUnit")
+@Table(name = "item_unit", uniqueConstraints = {
+        @UniqueConstraint(name = "item_unit_name_uniq", columnNames = "name")
 })
-public class ItemCategory {
+public class ItemUnit
+{
+
     @Id
     @SequenceGenerator(
-            name="item_category_sec",
-            sequenceName = "item_category_sec",
+            name = "item_unit_sec",
+            sequenceName = "item_unit_sec",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "item_category_sec"
+            generator = "item_unit_sec"
     )
     @Column(
             name = "id",
             updatable = false
     )
     private Long id;
-    @Column(name = "name", nullable = false)
+    @Column(
+            name = "name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String name;
 
-    public ItemCategory() {
+    public ItemUnit() {
     }
 
-    public ItemCategory(String name) {
+    public ItemUnit(String name) {
         this.name = name;
     }
 
@@ -47,10 +53,10 @@ public class ItemCategory {
     public void setName(String name) {
         this.name = name;
     }
-//test
+
     @Override
     public String toString() {
-        return "ItemCategory{" +
+        return "ItemUnit{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

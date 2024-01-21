@@ -21,6 +21,12 @@ public class CountriesController {
     public ResponseEntity<List<Countries>> getCountries(){
         List<Countries> countries = countriesService.getAllCountries();
         return new ResponseEntity<>(countries, HttpStatus.OK);
+    }@GetMapping("/byId/{id}")
+    public ResponseEntity<Countries> getCountriesById(
+            @PathVariable("id") Long id
+    ){
+        Countries countries = countriesService.getCountriesById(id);
+        return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 
     @PostMapping("/add")

@@ -23,6 +23,9 @@ public class CountriesService {
     public List<Countries> getAllCountries(){
         return countriesRepo.findAll(Sort.by(Sort.Direction.ASC,"countryName"));
     }
+    public Countries getCountriesById(Long id){
+        return countriesRepo.findById(id).get();
+    }
 
     public Countries addCountry(Countries country){
         Optional<Countries> _country = countriesRepo.findCountriesByCountryName(country.getCountryName());

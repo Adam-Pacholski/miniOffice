@@ -13,7 +13,8 @@ public interface CountriesRepo extends JpaRepository<Countries, Long> {
 
     @Query("SELECT s FROM Countries s WHERE s.countryName = ?1")
     Optional<Countries> findCountriesByCountryName(String countryName);
-
-    @Query("SELECT s FROM Countries s WHERE s.code = ?1")
-    Optional<Countries> findCountriesByCode(Integer code);
+    @Query("SELECT s FROM Countries s WHERE s.countryName = ?1 AND NOT s.id=?2")
+    Optional<Countries> findCountriesByCountryNameNotId(String countryName, Long id);
+    @Query("SELECT s FROM Countries s WHERE s.code = ?1 AND NOT s.id=?2")
+    Optional<Countries> findCountriesByCodeNotId(Integer code, Long id);
 }

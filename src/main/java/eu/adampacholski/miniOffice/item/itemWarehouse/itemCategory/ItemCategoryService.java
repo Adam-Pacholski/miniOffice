@@ -1,4 +1,4 @@
-package eu.adampacholski.miniOffice.itemCategory;
+package eu.adampacholski.miniOffice.item.itemWarehouse.itemCategory;
 
 import eu.adampacholski.miniOffice.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,9 @@ public class ItemCategoryService {
     public List<ItemCategory> getItemsCategory() {
         return itemCategoryRepo.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
+
+    public ItemCategory getItemCategoryById(Long id){return itemCategoryRepo.findById(id).get();}
+
 
     public ItemCategory addItemCategory(ItemCategory itemCategory) {
         Optional<ItemCategory> _item = itemCategoryRepo.findItemCategoryByName(itemCategory.getName());

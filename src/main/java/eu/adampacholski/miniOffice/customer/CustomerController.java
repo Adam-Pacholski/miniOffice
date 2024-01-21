@@ -24,28 +24,26 @@ public class CustomerController {
     }
 
     @GetMapping("/byId/{id}")
-    public ResponseEntity<Customer> getCustomers(
+    public ResponseEntity<Customer> getCustomersById(
             @PathVariable("id") Long id
     ){
         Customer customers = customerService.getCustomerById(id);
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @PostMapping("/add/{countryId}")
+    @PostMapping("/add")
     public ResponseEntity<Customer> addCustomer(
-            @PathVariable("countryId") Long countryId,
             @RequestBody Customer customer){
-        Customer newCustomer = customerService.addCustomer(customer, countryId);
+        Customer newCustomer = customerService.addCustomer(customer);
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/edit/{customer_id}/{country_id}")
+    @PutMapping(path = "/edit/{id}")
     public ResponseEntity<Customer> editCountry(
-            @PathVariable("customer_id") Long customer_id,
-            @PathVariable("country_id") Long country_id,
+            @PathVariable("id") Long id,
             @RequestBody Customer customer
     ){
-        Customer editCustomer = customerService.updateCustomer(customer_id, country_id, customer);
+        Customer editCustomer = customerService.updateCustomer(id,customer);
         return new ResponseEntity<>(editCustomer, HttpStatus.OK);
     }
 

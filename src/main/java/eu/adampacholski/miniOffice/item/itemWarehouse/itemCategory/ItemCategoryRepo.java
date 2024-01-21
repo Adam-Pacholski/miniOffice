@@ -1,4 +1,4 @@
-package eu.adampacholski.miniOffice.itemCategory;
+package eu.adampacholski.miniOffice.item.itemWarehouse.itemCategory;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -12,4 +12,9 @@ public interface CustomerRepo extends JpaRepository<Customer, Long> {
 
     @Query("SELECT s FROM Customer s WHERE s.name = ?1")
     Optional<Customer> findCustomerByName(String name);
+
+    @Query("SELECT s FROM Customer s WHERE s.name = ?1 AND NOT s.id=?2")
+    Optional<Customer> findCustomerByNameAndNotId(String name, Long id);
+
+
 }

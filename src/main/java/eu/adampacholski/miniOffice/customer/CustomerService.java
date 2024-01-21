@@ -25,18 +25,18 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(Long id){return customerRepo.findById(id).get();}
-    public Customer addCustomer(Customer customer, Long countryId){
+
+    public Customer addCustomer(Customer customer){
         Optional<Customer> customerByName = customerRepo.findCustomerByName(customer.getName());
         if(customerByName.isPresent())
             throw new NotFoundException("Podana nazwa już istnieje");
-        customer.setCountries(countriesRepo.findCountriesById(countryId).get());
        return customerRepo.save(customer);
     }
 
-    public Customer updateCustomer(Long customerId , Long countryId, Customer customer){
-        Customer oldCustomer = customerRepo.findById(customerId).get();
-        Optional<Customer> customerByName = customerRepo.findCustomerByName(customer.getName());
-        if(customerByName.isPresent())
+    public Customer updateCustomer(Long id, Customer customer){
+        Customer oldCustomer = customerRepo.findById(id).get();
+        Optional<Customer> customerByName = customerRepo.findCustomerByNameAndNotId(customer.getName(), id);
+        if(customerByName.isPresent() )
             throw new NotFoundException("Podana nazwa już istnieje");
 
         oldCustomer.setName(customer.getName());
@@ -45,7 +45,7 @@ public class CustomerService {
         oldCustomer.setCity(customer.getCity());
         oldCustomer.setPhone(customer.getPhone());
         oldCustomer.setPhone(customer.getPhone());
-        oldCustomer.setCountries(countriesRepo.findCountriesById(countryId).get());
+        oldCustomer.setCountries(customer.getCountries());
 
         return customerRepo.save(oldCustomer);
     }
