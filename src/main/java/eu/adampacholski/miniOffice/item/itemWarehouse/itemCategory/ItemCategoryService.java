@@ -34,7 +34,7 @@ public class ItemCategoryService {
 
     public ItemCategory updateItemCategory(ItemCategory itemCategory, Long id) {
         ItemCategory newItemCategory = itemCategoryRepo.findById(id).get();
-        Optional<ItemCategory> _item = itemCategoryRepo.findItemCategoryByName(itemCategory.getName());
+        Optional<ItemCategory> _item = itemCategoryRepo.findItemCategoryByNameAndNotId(itemCategory.getName(),id);
         if (_item.isPresent())
             throw new NotFoundException("Podana nazwa już istnieje");
         newItemCategory.setName(itemCategory.getName());

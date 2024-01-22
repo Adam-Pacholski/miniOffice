@@ -47,12 +47,15 @@ public class MiniOfficeApplication {
 			Customer adam = new Customer("Adam Pacholski", "Am Bahndamm 10", "26197", "Huntlosen", "adam.pacholski1985@gmail.com", "1783466541", "Prywatny");
 			Customer anna = new Customer("Anna Smerechynska", "11 Listopada 42/8", "03447", "Warszawa", "anna.smerechynska@gmail.com", "123456789", "Prywatny");
 			Customer malina = new Customer("Usługi graficzne 'BEZSENS'", "Wyimaginowana ulica 5", "00001", "Nibylandia", "info@bezsens.com", "666333666999", "Firma");
-			adam.setCountries(countriesRepo.findCountriesById(2L).get());
-			anna.setCountries(countriesRepo.findCountriesById(1L).get());
-			malina.setCountries(countriesRepo.findCountriesById(3L).get());
+			Customer ups = new Customer("Rogemann", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Dostawca");
+			adam.setCountries(countriesRepo.findById(2L).get());
+			anna.setCountries(countriesRepo.findById(1L).get());
+			malina.setCountries(countriesRepo.findById(3L).get());
+			ups.setCountries(countriesRepo.findById(2L).get());
 			customerRepo.save(adam);
 			customerRepo.save(anna);
 			customerRepo.save(malina);
+			customerRepo.save(ups);
 
 			//Dodawanie 3 Item-category
 
@@ -80,9 +83,9 @@ public class MiniOfficeApplication {
 			itemUnitRepo.save(itemUnit2);
 			itemUnitRepo.save(itemUnit3);
 
-			Item item1 = new Item("02158965555", "Wkręty 4x35", "Wkręty o długości 35mm do drewna", 58.12);
-			Item item2 = new Item("021566465555", "Wkręty 4x40", "Wkręty o długości 40mm do drewna", 59.12);
-			Item item3 = new Item("11166465555", "Płyta 2800x2070 Biała", "Płyta wiurowa oklejana białą okleiną", 80.99);
+			Item item1 = new Item("02158965555", "Wkręty 4x35", "Wkręty o długości 35mm do drewna", 58.12,2);
+			Item item2 = new Item("021566465555", "Wkręty 4x40", "Wkręty o długości 40mm do drewna", 59.12,10);
+			Item item3 = new Item("11166465555", "Płyta 2800x2070 Biała", "Płyta wiurowa oklejana białą okleiną", 80.99,32);
 
 			item1.setItemWarehouse(itemWarehouseRepo.findById(3L).get());
 			item2.setItemWarehouse(itemWarehouseRepo.findById(3L).get());

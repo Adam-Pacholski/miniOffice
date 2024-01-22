@@ -26,6 +26,10 @@ public class CustomerService {
 
     public Customer getCustomerById(Long id){return customerRepo.findById(id).get();}
 
+    public List<Customer> getAllByType(String name){return customerRepo.findAllByType(name).get();}
+
+    public List<Customer> getAllByNotType(String name){return customerRepo.findAllByNotType(name).get();}
+
     public Customer addCustomer(Customer customer){
         Optional<Customer> customerByName = customerRepo.findCustomerByName(customer.getName());
         if(customerByName.isPresent())

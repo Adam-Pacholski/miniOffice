@@ -42,6 +42,8 @@ public class Item {
     @Column(name = "price",
             nullable = false)
     private Double price;
+    @Column(name = "amount")
+    private Integer amount;
 
     @ManyToOne(
             cascade = CascadeType.DETACH,
@@ -80,21 +82,31 @@ public class Item {
     public Item() {
     }
 
-    public Item(String partNumber, String name, String description, Double price) {
+    public Item(String partNumber, String name, String description, Double price, Integer amount) {
         this.partNumber = partNumber;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.amount = amount;
     }
 
-    public Item(String partNumber, String name, String description, Double price, ItemCategory itemCategory, ItemWarehouse itemWarehouse, ItemUnit itemUnit) {
+    public Item(String partNumber, String name, String description, Double price, Integer amount, ItemCategory itemCategory, ItemWarehouse itemWarehouse, ItemUnit itemUnit) {
         this.partNumber = partNumber;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.amount = amount;
         this.itemCategory = itemCategory;
         this.itemWarehouse = itemWarehouse;
         this.itemUnit = itemUnit;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
     public Long getId() {

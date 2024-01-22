@@ -33,7 +33,7 @@ public class ItemWarehouseService {
 
     public ItemWarehouse updateItem(ItemWarehouse itemWarehouse, Long id) {
         ItemWarehouse newItem = itemWarehouseRepo.findById(id).get();
-        Optional<ItemWarehouse> _item = itemWarehouseRepo.findItemWarehouseByName(itemWarehouse.getName());
+        Optional<ItemWarehouse> _item = itemWarehouseRepo.findItemWarehouseByNameAndNotId(itemWarehouse.getName(),id);
         if (_item.isPresent())
             throw new NotFoundException("Podana nazwa już istnieje");
         newItem.setName(itemWarehouse.getName());

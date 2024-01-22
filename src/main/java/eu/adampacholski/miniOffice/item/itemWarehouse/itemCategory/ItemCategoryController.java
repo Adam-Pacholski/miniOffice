@@ -19,13 +19,13 @@ public class ItemCategoryController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ItemCategory>> getItemCategory() {
+    public ResponseEntity<List<ItemCategory>> get() {
         List<ItemCategory> itemCategories = itemCategoryService.getItemsCategory();
         return new ResponseEntity<>(itemCategories, HttpStatus.OK);
     }
 
     @GetMapping("/byId/{id}")
-    public ResponseEntity<ItemCategory> getItemCategoriesById(
+    public ResponseEntity<ItemCategory> getById(
             @PathVariable("id") Long id
     ){
         ItemCategory itemCategory = itemCategoryService.getItemCategoryById(id);
@@ -33,14 +33,14 @@ public class ItemCategoryController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ItemCategory> addCustomer(
+    public ResponseEntity<ItemCategory> add(
             @RequestBody ItemCategory itemCategory) {
         ItemCategory newItemCategory = itemCategoryService.addItemCategory(itemCategory);
         return new ResponseEntity<>(newItemCategory, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/edit/{id}")
-    public ResponseEntity<ItemCategory> editCountry(
+    public ResponseEntity<ItemCategory> edit(
             @PathVariable("id") Long id,
             @RequestBody ItemCategory itemCategory
     ) {
@@ -49,7 +49,7 @@ public class ItemCategoryController {
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<?> deleteCountry(
+    public ResponseEntity<?> delete(
             @PathVariable("id") Long id
     ) {
         itemCategoryService.deleteItemCategory(id);

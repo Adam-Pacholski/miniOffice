@@ -18,28 +18,44 @@ public class CustomerController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Customer>> getCustomers(){
+    public ResponseEntity<List<Customer>> get(){
         List<Customer> customers = customerService.getCustomers();
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
     @GetMapping("/byId/{id}")
-    public ResponseEntity<Customer> getCustomersById(
+    public ResponseEntity<Customer> getById(
             @PathVariable("id") Long id
     ){
         Customer customers = customerService.getCustomerById(id);
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
+    @GetMapping("/allByType/{name}")
+    public ResponseEntity<List<Customer>> getByType(
+            @PathVariable("name") String name
+    ){
+        List<Customer> customers = customerService.getAllByType(name);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @GetMapping("/allByNotType/{name}")
+    public ResponseEntity<List<Customer>> getByNotType(
+            @PathVariable("name") String name
+    ){
+        List<Customer> customers = customerService.getAllByNotType(name);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
     @PostMapping("/add")
-    public ResponseEntity<Customer> addCustomer(
+    public ResponseEntity<Customer> add(
             @RequestBody Customer customer){
         Customer newCustomer = customerService.addCustomer(customer);
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/edit/{id}")
-    public ResponseEntity<Customer> editCountry(
+    public ResponseEntity<Customer> edit(
             @PathVariable("id") Long id,
             @RequestBody Customer customer
     ){
@@ -48,7 +64,7 @@ public class CustomerController {
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<?> deleteCountry(
+    public ResponseEntity<?> delete(
             @PathVariable("id") Long id
     ){
         customerService.deleteCustomer(id);

@@ -16,13 +16,13 @@ public class ItemWarenhouseController {
         this.itemWarehouseService = itemWarehouseService;
     }
     @GetMapping("/all")
-    public ResponseEntity<List<ItemWarehouse>> getItem() {
+    public ResponseEntity<List<ItemWarehouse>> get() {
         List<ItemWarehouse> itemWarehouses = itemWarehouseService.getItems();
         return new ResponseEntity<>(itemWarehouses, HttpStatus.OK);
     }
 
     @GetMapping("/byId/{id}")
-    public ResponseEntity<ItemWarehouse> getItemById(
+    public ResponseEntity<ItemWarehouse> getById(
             @PathVariable("id") Long id
     ){
         ItemWarehouse itemWarehouse = itemWarehouseService.getItemById(id);
@@ -30,14 +30,14 @@ public class ItemWarenhouseController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ItemWarehouse> addCustomer(
+    public ResponseEntity<ItemWarehouse> add(
             @RequestBody ItemWarehouse itemWarehouse) {
         ItemWarehouse newItem = itemWarehouseService.addItem(itemWarehouse);
         return new ResponseEntity<>(newItem, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/edit/{id}")
-    public ResponseEntity<ItemWarehouse> editCountry(
+    public ResponseEntity<ItemWarehouse> edit(
             @PathVariable("id") Long id,
             @RequestBody ItemWarehouse itemWarehouse
     ) {
@@ -46,7 +46,7 @@ public class ItemWarenhouseController {
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<?> deleteCountry(
+    public ResponseEntity<?> delete(
             @PathVariable("id") Long id
     ) {
         itemWarehouseService.deleteItem(id);

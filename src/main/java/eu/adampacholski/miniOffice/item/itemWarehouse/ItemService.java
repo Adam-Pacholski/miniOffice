@@ -19,31 +19,31 @@ public class ItemService {
         this.itemRepo = itemRepo;
     }
 
-    public List<Item> getItems() {
+    public List<Item> get() {
         return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
-    public Item getItemById(Long id) {
+    public Item getById(Long id) {
         return itemRepo.findById(id).get();
     }
 
-
-    public Item addItem(Item item) {
-        Optional<Item> _item = itemRepo.findItemByPartName(item.getPartNumber());
+    public Item add(Item item) {
+        Optional<Item> _item = itemRepo.findByPartNumber(item.getPartNumber());
         if (_item.isPresent())
             throw new NotFoundException("Podana część już istnieje");
         return itemRepo.save(item);
     }
 
-    public Item updateItem(Item item, Long id) {
+    public Item update(Item item, Long id) {
         Item newItem = itemRepo.findById(id).get();
-        Optional<Item> _item = itemRepo.findItemByPartName(item.getPartNumber());
+        Optional<Item> _item = itemRepo.findItemByPartNumberAndOntId(item.getPartNumber(), id);
         if (_item.isPresent())
-            throw new NotFoundException("Podana nazwa już istnieje");
+            throw new NotFoundException("Podany przedmiot już istnieje");
         newItem.setPartNumber(item.getPartNumber());
         newItem.setName(item.getName());
         newItem.setDescription(item.getDescription());
         newItem.setPrice(item.getPrice());
+        newItem.setAmount(item.getAmount());
         newItem.setItemCategory(item.getItemCategory());
         newItem.setItemWarehouse(item.getItemWarehouse());
         newItem.setItemUnit(item.getItemUnit());
@@ -51,7 +51,7 @@ public class ItemService {
         return itemRepo.save(newItem);
     }
 
-    public void deleteItem(Long id) {
+    public void delete(Long id) {
         boolean exist = itemRepo.existsById(id);
         if (!exist)
             throw new NotFoundException("W bazie nie ma kategorii o id:" + id);

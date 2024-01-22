@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface ItemWarehouseRepo extends JpaRepository<ItemWarehouse, Long> {
     @Query("SELECT s FROM ItemWarehouse s WHERE s.name = ?1")
     Optional<ItemWarehouse> findItemWarehouseByName(String name);
+
+    @Query("SELECT s FROM ItemWarehouse s WHERE s.name = ?1 AND NOT s.id=?2")
+    Optional<ItemWarehouse> findItemWarehouseByNameAndNotId(String name, Long id);
 }

@@ -18,11 +18,11 @@ public class CountriesController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Countries>> getCountries(){
+    public ResponseEntity<List<Countries>> get(){
         List<Countries> countries = countriesService.getAllCountries();
         return new ResponseEntity<>(countries, HttpStatus.OK);
     }@GetMapping("/byId/{id}")
-    public ResponseEntity<Countries> getCountriesById(
+    public ResponseEntity<Countries> getById(
             @PathVariable("id") Long id
     ){
         Countries countries = countriesService.getCountriesById(id);
@@ -30,14 +30,14 @@ public class CountriesController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Countries> addCountry(
+    public ResponseEntity<Countries> add(
             @RequestBody Countries country){
         Countries newCountry = countriesService.addCountry(country);
         return new ResponseEntity<>(newCountry, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/edit/{id}")
-    public ResponseEntity<Countries> editCountry(
+    public ResponseEntity<Countries> edit(
             @PathVariable("id") Long id,
             @RequestBody Countries countries
     ){
@@ -46,7 +46,7 @@ public class CountriesController {
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<?> deleteCountry(
+    public ResponseEntity<?> delete(
             @PathVariable("id") Long id
     ){
         countriesService.deleteCountry(id);

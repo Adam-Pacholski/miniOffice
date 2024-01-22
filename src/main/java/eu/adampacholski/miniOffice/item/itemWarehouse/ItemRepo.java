@@ -10,8 +10,8 @@ import java.util.Optional;
 @Repository
 public interface ItemRepo extends JpaRepository<Item, Long> {
 
-    @Query("SELECT s FROM Item s WHERE s.name = ?1")
-    Optional<Item> findItemByName(String name);
-    @Query("SELECT s FROM Item s WHERE s.partNumber= ?1")
-    Optional<Item> findItemByPartName(String name);
+    @Query("SELECT s FROM Item s WHERE s.partNumber = ?1")
+    Optional<Item> findByPartNumber(String name);
+    @Query("SELECT s FROM Item s WHERE s.partNumber= ?1 AND NOT s.id = ?2")
+    Optional<Item> findItemByPartNumberAndOntId(String name, Long id);
 }

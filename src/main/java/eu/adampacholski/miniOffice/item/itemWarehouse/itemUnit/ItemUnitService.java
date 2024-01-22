@@ -34,7 +34,7 @@ public class ItemUnitService {
 
     public ItemUnit updateItem(ItemUnit itemUnit, Long id) {
         ItemUnit newItem = itemUnitRepo.findById(id).get();
-        Optional<ItemUnit> _item = itemUnitRepo.findItemByName(itemUnit.getName());
+        Optional<ItemUnit> _item = itemUnitRepo.findItemByNameAndNotId(itemUnit.getName(),id);
         if (_item.isPresent())
             throw new NotFoundException("Podana nazwa już istnieje");
         newItem.setName(itemUnit.getName());

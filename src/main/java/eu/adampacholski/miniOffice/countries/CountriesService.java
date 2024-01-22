@@ -39,10 +39,10 @@ public class CountriesService {
     }
 
    public Countries updateCountryById(Long id, Countries countries){
-        Optional<Countries> _coutry = countriesRepo.findCountriesByCountryName(countries.getCountryName());
+        Optional<Countries> _coutry = countriesRepo.findCountriesByCountryNameNotId(countries.getCountryName(), id);
         if(_coutry.isPresent())
             throw new NotFoundException("Podany kraj już istnieje");
-        _coutry = countriesRepo.findCountriesByCode(countries.getCode());
+        _coutry = countriesRepo.findCountriesByCodeNotId(countries.getCode(),id);
         if (_coutry.isPresent())
             throw new NotFoundException("Podany numer kierunkowy już istnieje");
 

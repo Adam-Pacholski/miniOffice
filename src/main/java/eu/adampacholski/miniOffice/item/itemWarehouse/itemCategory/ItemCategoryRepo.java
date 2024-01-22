@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface ItemCategoryRepo extends JpaRepository<ItemCategory, Long> {
     @Query("SELECT s FROM ItemCategory s WHERE s.name = ?1")
     Optional<ItemCategory> findItemCategoryByName(String name);
+
+    @Query("SELECT s FROM ItemCategory s WHERE s.name = ?1 AND NOT s.id=?2")
+    Optional<ItemCategory> findItemCategoryByNameAndNotId(String name, Long id);
 }

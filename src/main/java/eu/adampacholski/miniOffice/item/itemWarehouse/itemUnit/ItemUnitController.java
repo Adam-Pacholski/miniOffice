@@ -19,13 +19,13 @@ public class ItemUnitController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ItemUnit>> getItem() {
+    public ResponseEntity<List<ItemUnit>> get() {
         List<ItemUnit> item = itemUnitService.getItems();
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
     @GetMapping("/byId/{id}")
-    public ResponseEntity<ItemUnit> getItemById(
+    public ResponseEntity<ItemUnit> getById(
             @PathVariable("id") Long id
     ){
         ItemUnit item = itemUnitService.getItemById(id);
@@ -33,14 +33,14 @@ public class ItemUnitController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ItemUnit> addCustomer(
+    public ResponseEntity<ItemUnit> add(
             @RequestBody ItemUnit item) {
         ItemUnit newItem = itemUnitService.addItem(item);
         return new ResponseEntity<>(newItem, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/edit/{id}")
-    public ResponseEntity<ItemUnit> editCountry(
+    public ResponseEntity<ItemUnit> edit(
             @PathVariable("id") Long id,
             @RequestBody ItemUnit item
     ) {
@@ -49,7 +49,7 @@ public class ItemUnitController {
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<?> deleteCountry(
+    public ResponseEntity<?> delete(
             @PathVariable("id") Long id
     ) {
         itemUnitService.deleteItem(id);
