@@ -26,36 +26,45 @@ public class Customer {
     private Long id;
     @Column(
             name = "name",
-            nullable = false
+            nullable = false,
+            columnDefinition = "TEXT"
     )
     private String name;
     @Column(
             name = "street",
-            nullable = false
+            nullable = false,
+            columnDefinition = "TEXT"
     )
     private String street;
     @Column(
             name = "post_code",
-            nullable = false
+            nullable = false,
+            columnDefinition = "TEXT"
     )
     private String postCode;
     @Column(
             name = "city",
-            nullable = false
+            nullable = false,
+            columnDefinition = "TEXT"
     )
     private String city;
     @Column(
             name = "email",
-            nullable = true
+            nullable = true,
+            columnDefinition = "TEXT"
     )
     private String email;
     @Column(
             name = "phone",
-            nullable = true
+            nullable = true,
+            columnDefinition = "TEXT"
     )
     private String phone;
-    @Column(name = "customer_type")
+    @Column(name = "customer_type",
+    nullable = false,
+            columnDefinition = "TEXT")
     private String customerType;
+
 
     @ManyToOne(
             cascade = CascadeType.DETACH,
@@ -81,6 +90,17 @@ public class Customer {
         this.email = email;
         this.phone = phone;
         this.customerType = customerType;
+    }
+
+    public Customer(String name, String street, String postCode, String city, String email, String phone, String customerType, Countries countries) {
+        this.name = name;
+        this.street = street;
+        this.postCode = postCode;
+        this.city = city;
+        this.email = email;
+        this.phone = phone;
+        this.customerType = customerType;
+        this.countries = countries;
     }
 
     public Countries getCountries() {
@@ -166,6 +186,7 @@ public class Customer {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", customerType='" + customerType + '\'' +
+                ", countries=" + countries +
                 '}';
     }
 }
