@@ -22,6 +22,9 @@ public class ItemService {
     public List<Item> get() {
         return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
+    public List<Item> getByCategory(String category) {
+        return itemRepo.findItemsByCategory(category, Sort.by(Sort.Direction.ASC, "name"));
+    }
 
     public Item getById(Long id) {
         return itemRepo.findById(id).get();

@@ -47,15 +47,42 @@ public class MiniOfficeApplication {
 			Customer adam = new Customer("Adam Pacholski", "Am Bahndamm 10", "26197", "Huntlosen", "adam.pacholski1985@gmail.com", "1783466541", "Prywatny");
 			Customer anna = new Customer("Anna Smerechynska", "11 Listopada 42/8", "03447", "Warszawa", "anna.smerechynska@gmail.com", "123456789", "Prywatny");
 			Customer malina = new Customer("Usługi graficzne 'BEZSENS'", "Wyimaginowana ulica 5", "00001", "Nibylandia", "info@bezsens.com", "666333666999", "Firma");
-			Customer ups = new Customer("Rogemann", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Dostawca");
+			Customer ups = new Customer("Rogemann1", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Dostawca");
+			Customer ups2 = new Customer("Rogemann2", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Prywatny");
+			Customer ups3 = new Customer("Rogemann3", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Dostawca");
+			Customer ups4 = new Customer("Rogemann4", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Prywatny");
+			Customer ups5 = new Customer("Rogemann5", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Prywatny");
+			Customer ups7 = new Customer("Rogemann7", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Prywatny");
+			Customer ups8 = new Customer("Rogemann8", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Prywatny");
+			Customer ups6 = new Customer("Rogemann6", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Prywatny");
+			Customer ups9 = new Customer("Rogemann9", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Prywatny");
+			Customer ups10 = new Customer("Rogemann10", "Hogenbogen 18","46198","Visbek","rogeman@info.de","234-334", "Prywatny");
 			adam.setCountries(countriesRepo.findById(2L).get());
 			anna.setCountries(countriesRepo.findById(1L).get());
 			malina.setCountries(countriesRepo.findById(3L).get());
 			ups.setCountries(countriesRepo.findById(2L).get());
+			ups2.setCountries(countriesRepo.findById(2L).get());
+			ups3.setCountries(countriesRepo.findById(2L).get());
+			ups4.setCountries(countriesRepo.findById(2L).get());
+			ups5.setCountries(countriesRepo.findById(2L).get());
+			ups6.setCountries(countriesRepo.findById(2L).get());
+			ups7.setCountries(countriesRepo.findById(2L).get());
+			ups8.setCountries(countriesRepo.findById(2L).get());
+			ups9.setCountries(countriesRepo.findById(2L).get());
+			ups10.setCountries(countriesRepo.findById(2L).get());
 			customerRepo.save(adam);
 			customerRepo.save(anna);
 			customerRepo.save(malina);
 			customerRepo.save(ups);
+			customerRepo.save(ups2);
+			customerRepo.save(ups3);
+			customerRepo.save(ups4);
+			customerRepo.save(ups5);
+			customerRepo.save(ups6);
+			customerRepo.save(ups7);
+			customerRepo.save(ups8);
+			customerRepo.save(ups9);
+			customerRepo.save(ups10);
 
 			//Dodawanie 3 Item-category
 
