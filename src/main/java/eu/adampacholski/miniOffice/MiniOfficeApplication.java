@@ -4,6 +4,8 @@ import eu.adampacholski.miniOffice.countries.Countries;
 import eu.adampacholski.miniOffice.countries.CountriesRepo;
 import eu.adampacholski.miniOffice.customer.Customer;
 import eu.adampacholski.miniOffice.customer.CustomerRepo;
+import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatus;
+import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatusRepo;
 import eu.adampacholski.miniOffice.item.itemWarehouse.Item;
 import eu.adampacholski.miniOffice.item.itemWarehouse.ItemRepo;
 import eu.adampacholski.miniOffice.item.itemWarehouse.itemCategory.ItemCategory;
@@ -30,7 +32,8 @@ public class MiniOfficeApplication {
 										ItemCategoryRepo itemCategoryRepo,
 										ItemWarehouseRepo itemWarehouseRepo,
 										ItemUnitRepo itemUnitRepo,
-										ItemRepo itemRepo){
+										ItemRepo itemRepo,
+										InvoiceStatusRepo invoiceStatusRepo){
 		return args -> {
 
 			//Dodanie 3 krajów
@@ -130,6 +133,16 @@ public class MiniOfficeApplication {
 			itemRepo.save(item2);
 			itemRepo.save(item3);
 
+
+			InvoiceStatus inStat_1 = new InvoiceStatus("Zapłacone");
+			InvoiceStatus inStat_2 = new InvoiceStatus("Niezapłacone");
+			InvoiceStatus inStat_3 = new InvoiceStatus("Anulowane");
+			InvoiceStatus inStat_4 = new InvoiceStatus("Korekta");
+
+			invoiceStatusRepo.save(inStat_1);
+			invoiceStatusRepo.save(inStat_2);
+			invoiceStatusRepo.save(inStat_3);
+			invoiceStatusRepo.save(inStat_4);
 		};
 	}
 }
