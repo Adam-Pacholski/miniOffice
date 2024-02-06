@@ -4,6 +4,8 @@ import eu.adampacholski.miniOffice.countries.Countries;
 import eu.adampacholski.miniOffice.countries.CountriesRepo;
 import eu.adampacholski.miniOffice.customer.Customer;
 import eu.adampacholski.miniOffice.customer.CustomerRepo;
+import eu.adampacholski.miniOffice.invoice.InvoiceNrSetting.InvoiceNrSetting;
+import eu.adampacholski.miniOffice.invoice.InvoiceNrSetting.InvoiceNrSettingRepo;
 import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatus;
 import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatusRepo;
 import eu.adampacholski.miniOffice.item.itemWarehouse.Item;
@@ -18,6 +20,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.time.LocalDate;
+import java.util.Date;
+
 @SpringBootApplication
 
 public class MiniOfficeApplication {
@@ -33,7 +39,9 @@ public class MiniOfficeApplication {
 										ItemWarehouseRepo itemWarehouseRepo,
 										ItemUnitRepo itemUnitRepo,
 										ItemRepo itemRepo,
-										InvoiceStatusRepo invoiceStatusRepo){
+										InvoiceStatusRepo invoiceStatusRepo,
+										InvoiceNrSettingRepo invoiceNrSettingRepo
+										){
 		return args -> {
 
 			//Dodanie 3 krajów
@@ -143,6 +151,16 @@ public class MiniOfficeApplication {
 			invoiceStatusRepo.save(inStat_2);
 			invoiceStatusRepo.save(inStat_3);
 			invoiceStatusRepo.save(inStat_4);
+
+			InvoiceNrSetting invoiceNrSetting = new InvoiceNrSetting(2023,4);
+			invoiceNrSettingRepo.save(invoiceNrSetting);
+
+			LocalDate data = LocalDate.now();
+			System.out.println(data);
+			LocalDate nowaData = data.plusDays(5);
+			System.out.println(nowaData);
+			Integer test = nowaData.getYear();
+			System.out.println(test);
 		};
 	}
 }

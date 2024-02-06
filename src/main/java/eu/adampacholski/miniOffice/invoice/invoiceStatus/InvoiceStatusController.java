@@ -1,6 +1,5 @@
 package eu.adampacholski.miniOffice.invoice.invoiceStatus;
 
-import eu.adampacholski.miniOffice.countries.Countries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/v1/invoice_stat")
 public class InvoiceStatusController {
+
     private final InvoiceStatusService invoiceStatusService;
 
     @Autowired

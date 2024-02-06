@@ -2,6 +2,8 @@ package eu.adampacholski.miniOffice.invoice.InvoiceNrSetting;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "InvoiceNrSetting")
@@ -10,13 +12,13 @@ public class InvoiceNrSetting {
 
     @Id
     @SequenceGenerator(
-            name = "invoice_nr_setting",
-            sequenceName = "invoice_nr_setting",
+            name = "invoice_nr_setting_sec",
+            sequenceName = "invoice_nr_setting_sec",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = SEQUENCE,
-            generator = "invoice_nr_setting"
+            generator = "invoice_nr_setting_sec"
     )
     @Column(
             name = "id",
@@ -29,6 +31,8 @@ public class InvoiceNrSetting {
     @Column(name = "number",
             nullable = false)
     private Integer number;
+
+
 
     public InvoiceNrSetting() {
     }
