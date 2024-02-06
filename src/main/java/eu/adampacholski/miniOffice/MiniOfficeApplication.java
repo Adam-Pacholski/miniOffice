@@ -4,8 +4,10 @@ import eu.adampacholski.miniOffice.countries.Countries;
 import eu.adampacholski.miniOffice.countries.CountriesRepo;
 import eu.adampacholski.miniOffice.customer.Customer;
 import eu.adampacholski.miniOffice.customer.CustomerRepo;
+import eu.adampacholski.miniOffice.invoice.Invoice;
 import eu.adampacholski.miniOffice.invoice.InvoiceNrSetting.InvoiceNrSetting;
 import eu.adampacholski.miniOffice.invoice.InvoiceNrSetting.InvoiceNrSettingRepo;
+import eu.adampacholski.miniOffice.invoice.InvoiceRepo;
 import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatus;
 import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatusRepo;
 import eu.adampacholski.miniOffice.item.itemWarehouse.Item;
@@ -40,7 +42,9 @@ public class MiniOfficeApplication {
 										ItemUnitRepo itemUnitRepo,
 										ItemRepo itemRepo,
 										InvoiceStatusRepo invoiceStatusRepo,
-										InvoiceNrSettingRepo invoiceNrSettingRepo
+										InvoiceNrSettingRepo invoiceNrSettingRepo,
+										InvoiceRepo invoiceRepo
+
 										){
 		return args -> {
 
@@ -156,11 +160,36 @@ public class MiniOfficeApplication {
 			invoiceNrSettingRepo.save(invoiceNrSetting);
 
 			LocalDate data = LocalDate.now();
-			System.out.println(data);
-			LocalDate nowaData = data.plusDays(5);
-			System.out.println(nowaData);
-			Integer test = nowaData.getYear();
-			System.out.println(test);
+
+			Invoice in_1 = new Invoice();
+			in_1.setInvoiceNumber("F/01/2024");
+			in_1.setCustomer(customerRepo.findById(2L).get());
+			in_1.setTax(19);
+			in_1.setDiscount(0);
+			in_1.setInvoiceStatus(invoiceStatusRepo.findById(2L).get());
+
+			in_1.setRisedDate(data);
+			in_1.setTerminDate(data.plusDays(14));
+
+			invoiceRepo.save(in_1);
+
+			Invoice in_2 = new Invoice();
+			in_2.setInvoiceNumber("F/02/2024");
+			in_2.setCustomer(customerRepo.findById(2L).get());
+			in_2.setTax(19);
+			in_2.setDiscount(0);
+			in_2.setInvoiceStatus(invoiceStatusRepo.findById(1L).get());
+
+			in_2.setRisedDate(data);
+			in_2.setTerminDate(data.plusDays(7));
+
+			invoiceRepo.save(in_2);
+
+//			System.out.println(data);
+//			LocalDate nowaData = data.plusDays(5);
+//			System.out.println(nowaData);
+//			Integer test = nowaData.getYear();
+//			System.out.println(test);
 		};
 	}
 }
