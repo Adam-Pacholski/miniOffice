@@ -1,4 +1,4 @@
-package eu.adampacholski.miniOffice.invoice.InvoiceNrSetting;
+package eu.adampacholski.miniOffice.invoice.invoiceNrSetting;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

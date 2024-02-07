@@ -22,7 +22,9 @@ public class ItemController {
     public ResponseEntity<List<Item>> get() {
         List<Item> item = itemService.get();
         return new ResponseEntity<>(item, HttpStatus.OK);
-    }   @GetMapping("/byName/{cat}")
+    }
+
+    @GetMapping("/byName/{cat}")
     public ResponseEntity<List<Item>> getByName(
             @PathVariable("cat") String cat) {
         List<Item> item = itemService.getByCategory(cat);

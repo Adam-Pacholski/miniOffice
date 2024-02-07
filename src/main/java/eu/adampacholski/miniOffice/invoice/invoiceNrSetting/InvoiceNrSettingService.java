@@ -1,4 +1,4 @@
-package eu.adampacholski.miniOffice.invoice.InvoiceNrSetting;
+package eu.adampacholski.miniOffice.invoice.invoiceNrSetting;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +11,7 @@ public class InvoiceNrSettingService {
         this.invoiceNrSettingRepo = invoiceNrSettingRepo;
     }
 
-
-    public InvoiceNrSetting getById(Long id){
-        return invoiceNrSettingRepo.findById(id).get();
-    }
-
-    public InvoiceNrSetting update(InvoiceNrSetting invoiceNrSetting){
-        return invoiceNrSettingRepo.save(invoiceNrSetting);
+    public InvoiceNrSetting add(InvoiceNrSetting item) {
+    return invoiceNrSettingRepo.save(item);
     }
 }

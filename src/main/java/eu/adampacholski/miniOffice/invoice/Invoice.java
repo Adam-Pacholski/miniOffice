@@ -4,16 +4,21 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import eu.adampacholski.miniOffice.customer.Customer;
 import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatus;
+import eu.adampacholski.miniOffice.invoice.invoiceType.InvoiceType;
+import eu.adampacholski.miniOffice.invoice.productList.ProductList;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Invoice")
-@Table(name = "invoice", uniqueConstraints = {
-        @UniqueConstraint(name = "invoice_number_unique", columnNames = "invoice_number")
-})
+@Table(name = "invoice"
+//        , uniqueConstraints = {
+//        @UniqueConstraint(name = "invoice_number_unique", columnNames = "invoice_number")
+//}
+)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 public class Invoice {
@@ -29,30 +34,33 @@ public class Invoice {
             generator = "invoice_sec"
     )
     @Column(
-            name = "id",
-            updatable = false
+            name = "id"
+//            updatable = false
     )
     private Long id;
 
     @Column(
             name = "invoice_number",
-            nullable = false,
+//            nullable = false,
             columnDefinition = "TEXT"
     )
     private String invoiceNumber;
 
     @Column(
             name = "rised_date",
-            nullable = false
+//            nullable = false,
+            columnDefinition = "date"
     )
     private LocalDate risedDate;
     @Column(
             name = "termin_date",
-            nullable = false
+//            nullable = false,
+            columnDefinition = "date"
     )
     private LocalDate terminDate;
     @Column(
-            name = "paid_date"
+            name = "paid_date",
+            columnDefinition = "date"
     )
     private LocalDate paidDate;
     @Column(
@@ -60,17 +68,24 @@ public class Invoice {
             columnDefinition = "TEXT"
     )
     private String comments;
-    @Column(
-            name = "tax",
-            nullable = false
-    )
-    private Integer tax;
 
     @Column(
             name = "discount"
     )
     private Integer discount;
 
+    @ManyToOne(
+            cascade = CascadeType.DETACH,
+            fetch =  FetchType.EAGER
+    )
+    @JoinColumn(
+            name = "invoice_type_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "invoice_type_id_fk")
+//            nullable = false
+    )
+
+    private InvoiceType invoiceType;
 
     @ManyToOne(
             cascade = CascadeType.DETACH,
@@ -79,10 +94,9 @@ public class Invoice {
     @JoinColumn(
             name = "customer_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "customer_id_fk"),
-            nullable = false
+            foreignKey = @ForeignKey(name = "customer_id_fk")
+//            nullable = false
     )
-//    @JsonBackReference
     private Customer customer;
 
     @ManyToOne(
@@ -92,21 +106,47 @@ public class Invoice {
     @JoinColumn(
             name = "invoice_status_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "invoice_status_id_fr"),
-            nullable = false
+            foreignKey = @ForeignKey(name = "invoice_status_id_fr")
+//            nullable = false
     )
     private InvoiceStatus invoiceStatus;
+
+    @OneToMany(
+//            mappedBy = "invoice",
+            cascade = CascadeType.PERSIST,
+//            orphanRemoval = true,
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+            name = "invoice_id",
+            referencedColumnName = "id"
+    )
+
+    private List<ProductList> productLists;
 
     public Invoice() {
     }
 
-    public Invoice(String invoiceNumber, String comments, Integer tax, Integer discount, Customer customer, InvoiceStatus invoiceStatus) {
+
+    public Invoice(String invoiceNumber, LocalDate risedDate, LocalDate terminDate, LocalDate paidDate, String comments, Integer discount, InvoiceType invoiceType, Customer customer, InvoiceStatus invoiceStatus, List<ProductList> productLists) {
         this.invoiceNumber = invoiceNumber;
+        this.risedDate = risedDate;
+        this.terminDate = terminDate;
+        this.paidDate = paidDate;
         this.comments = comments;
-        this.tax = tax;
         this.discount = discount;
+        this.invoiceType = invoiceType;
         this.customer = customer;
         this.invoiceStatus = invoiceStatus;
+        this.productLists = productLists;
+    }
+
+    public List<ProductList> getProductLists() {
+        return productLists;
+    }
+
+    public void setProductLists(List<ProductList> productLists) {
+        this.productLists = productLists;
     }
 
     public Long getId() {
@@ -157,14 +197,6 @@ public class Invoice {
         this.comments = comments;
     }
 
-    public Integer getTax() {
-        return tax;
-    }
-
-    public void setTax(Integer tax) {
-        this.tax = tax;
-    }
-
     public Integer getDiscount() {
         return discount;
     }
@@ -189,6 +221,14 @@ public class Invoice {
         this.invoiceStatus = invoiceStatus;
     }
 
+    public InvoiceType getInvoiceType() {
+        return invoiceType;
+    }
+
+    public void setInvoiceType(InvoiceType invoiceType) {
+        this.invoiceType = invoiceType;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
@@ -198,10 +238,11 @@ public class Invoice {
                 ", terminDate=" + terminDate +
                 ", paidDate=" + paidDate +
                 ", comments='" + comments + '\'' +
-                ", tax=" + tax +
                 ", discount=" + discount +
+                ", invoiceType=" + invoiceType +
                 ", customer=" + customer +
                 ", invoiceStatus=" + invoiceStatus +
+                ", productLists=" + productLists +
                 '}';
     }
 }

@@ -1,11 +1,8 @@
 package eu.adampacholski.miniOffice.invoice;
 
-import eu.adampacholski.miniOffice.item.itemWarehouse.Item;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +20,11 @@ public class InvoiceController {
         List<Invoice> items = invoiceService.get();
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
+    @PostMapping("/add")
+    public ResponseEntity<Invoice> add(
+            @RequestBody Invoice item) {
+        Invoice newItem = invoiceService.add(item);
+        return new ResponseEntity<>(newItem, HttpStatus.CREATED);
+    }
+
 }

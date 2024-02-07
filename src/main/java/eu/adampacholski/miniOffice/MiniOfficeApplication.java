@@ -5,11 +5,14 @@ import eu.adampacholski.miniOffice.countries.CountriesRepo;
 import eu.adampacholski.miniOffice.customer.Customer;
 import eu.adampacholski.miniOffice.customer.CustomerRepo;
 import eu.adampacholski.miniOffice.invoice.Invoice;
-import eu.adampacholski.miniOffice.invoice.InvoiceNrSetting.InvoiceNrSetting;
-import eu.adampacholski.miniOffice.invoice.InvoiceNrSetting.InvoiceNrSettingRepo;
+import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSetting;
+import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSettingRepo;
 import eu.adampacholski.miniOffice.invoice.InvoiceRepo;
+import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSettingService;
 import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatus;
 import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatusRepo;
+import eu.adampacholski.miniOffice.invoice.invoiceType.InvoiceType;
+import eu.adampacholski.miniOffice.invoice.invoiceType.InvoiceTypeRepo;
 import eu.adampacholski.miniOffice.item.itemWarehouse.Item;
 import eu.adampacholski.miniOffice.item.itemWarehouse.ItemRepo;
 import eu.adampacholski.miniOffice.item.itemWarehouse.itemCategory.ItemCategory;
@@ -24,7 +27,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @SpringBootApplication
 
@@ -43,9 +45,8 @@ public class MiniOfficeApplication {
 										ItemRepo itemRepo,
 										InvoiceStatusRepo invoiceStatusRepo,
 										InvoiceNrSettingRepo invoiceNrSettingRepo,
-										InvoiceRepo invoiceRepo
-
-										){
+										InvoiceRepo invoiceRepo,
+										InvoiceTypeRepo invoiceTypeRepo){
 		return args -> {
 
 			//Dodanie 3 krajów
@@ -159,15 +160,23 @@ public class MiniOfficeApplication {
 			InvoiceNrSetting invoiceNrSetting = new InvoiceNrSetting(2023,4);
 			invoiceNrSettingRepo.save(invoiceNrSetting);
 
+			InvoiceType in_type_1 = new InvoiceType("Faktura", "F");
+			InvoiceType in_type_2 = new InvoiceType("Korekta", "K");
+			InvoiceType in_type_3 = new InvoiceType("List przewozowy", "L");
+			InvoiceType in_type_4 = new InvoiceType("Oferta", "O");
+			invoiceTypeRepo.save(in_type_1);
+			invoiceTypeRepo.save(in_type_2);
+			invoiceTypeRepo.save(in_type_3);
+			invoiceTypeRepo.save(in_type_4);
+
 			LocalDate data = LocalDate.now();
 
 			Invoice in_1 = new Invoice();
 			in_1.setInvoiceNumber("F/01/2024");
 			in_1.setCustomer(customerRepo.findById(2L).get());
-			in_1.setTax(19);
 			in_1.setDiscount(0);
 			in_1.setInvoiceStatus(invoiceStatusRepo.findById(2L).get());
-
+			in_1.setInvoiceType(invoiceTypeRepo.findById(1L).get());
 			in_1.setRisedDate(data);
 			in_1.setTerminDate(data.plusDays(14));
 
@@ -176,10 +185,9 @@ public class MiniOfficeApplication {
 			Invoice in_2 = new Invoice();
 			in_2.setInvoiceNumber("F/02/2024");
 			in_2.setCustomer(customerRepo.findById(2L).get());
-			in_2.setTax(19);
 			in_2.setDiscount(0);
 			in_2.setInvoiceStatus(invoiceStatusRepo.findById(1L).get());
-
+			in_2.setInvoiceType(invoiceTypeRepo.findById(1L).get());
 			in_2.setRisedDate(data);
 			in_2.setTerminDate(data.plusDays(7));
 

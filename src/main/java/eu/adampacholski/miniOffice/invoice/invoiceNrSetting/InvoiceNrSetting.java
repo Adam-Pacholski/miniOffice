@@ -1,8 +1,6 @@
-package eu.adampacholski.miniOffice.invoice.InvoiceNrSetting;
+package eu.adampacholski.miniOffice.invoice.invoiceNrSetting;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDate;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 

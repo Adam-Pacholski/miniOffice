@@ -90,8 +90,9 @@ public class Customer {
 
     @OneToMany(
            mappedBy = "customer",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
     )
 //    @JsonManagedReference
     private List<Invoice> invoices;
