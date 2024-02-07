@@ -157,8 +157,14 @@ public class MiniOfficeApplication {
 			invoiceStatusRepo.save(inStat_3);
 			invoiceStatusRepo.save(inStat_4);
 
-			InvoiceNrSetting invoiceNrSetting = new InvoiceNrSetting(2023,4);
-			invoiceNrSettingRepo.save(invoiceNrSetting);
+			InvoiceNrSetting invoiceNrSetting_1 = new InvoiceNrSetting(2023,4);
+			invoiceNrSettingRepo.save(invoiceNrSetting_1);
+			InvoiceNrSetting invoiceNrSetting_2 = new InvoiceNrSetting(2023,4);
+			invoiceNrSettingRepo.save(invoiceNrSetting_2);
+			InvoiceNrSetting invoiceNrSetting_3 = new InvoiceNrSetting(2023,4);
+			invoiceNrSettingRepo.save(invoiceNrSetting_3);
+			InvoiceNrSetting invoiceNrSetting_4 = new InvoiceNrSetting(2023,4);
+			invoiceNrSettingRepo.save(invoiceNrSetting_4);
 
 			InvoiceType in_type_1 = new InvoiceType("Faktura", "F");
 			InvoiceType in_type_2 = new InvoiceType("Korekta", "K");

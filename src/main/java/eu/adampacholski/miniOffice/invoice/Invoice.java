@@ -1,5 +1,6 @@
 package eu.adampacholski.miniOffice.invoice;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import eu.adampacholski.miniOffice.customer.Customer;
@@ -14,10 +15,9 @@ import java.util.List;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Invoice")
-@Table(name = "invoice"
-//        , uniqueConstraints = {
-//        @UniqueConstraint(name = "invoice_number_unique", columnNames = "invoice_number")
-//}
+@Table(name = "invoice", uniqueConstraints = {
+        @UniqueConstraint(name = "invoice_number_unique", columnNames = "invoice_number")
+}
 )
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
@@ -109,6 +109,7 @@ public class Invoice {
             foreignKey = @ForeignKey(name = "invoice_status_id_fr")
 //            nullable = false
     )
+    @JsonBackReference
     private InvoiceStatus invoiceStatus;
 
     @OneToMany(

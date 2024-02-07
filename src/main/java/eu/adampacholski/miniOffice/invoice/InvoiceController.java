@@ -20,10 +20,20 @@ public class InvoiceController {
         List<Invoice> items = invoiceService.get();
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
-    @PostMapping("/add")
+
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<Invoice>> getAllByCustomerId(
+            @PathVariable("id") Long id
+    ) {
+        List<Invoice> items = invoiceService.getAllByCustomerId(id);
+        return new ResponseEntity<>(items, HttpStatus.OK);
+    }
+    @PostMapping("/add/{days}")
     public ResponseEntity<Invoice> add(
+            @PathVariable("days") Integer days,
             @RequestBody Invoice item) {
-        Invoice newItem = invoiceService.add(item);
+
+        Invoice newItem = invoiceService.add(item,days);
         return new ResponseEntity<>(newItem, HttpStatus.CREATED);
     }
 

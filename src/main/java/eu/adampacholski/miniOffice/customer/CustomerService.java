@@ -2,6 +2,7 @@ package eu.adampacholski.miniOffice.customer;
 
 import eu.adampacholski.miniOffice.Exception.NotFoundException;
 import eu.adampacholski.miniOffice.countries.CountriesRepo;
+import eu.adampacholski.miniOffice.invoice.InvoiceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,12 @@ import java.util.Optional;
 @Service
 public class CustomerService {
     private final CustomerRepo customerRepo;
-    private final CountriesRepo countriesRepo;
+
 
     @Autowired
-    public CustomerService(CustomerRepo customerRepo, CountriesRepo countriesRepo) {
+    public CustomerService(CustomerRepo customerRepo) {
         this.customerRepo = customerRepo;
-        this.countriesRepo = countriesRepo;
+
     }
 
     public List<Customer> getCustomers(){
@@ -48,7 +49,7 @@ public class CustomerService {
         oldCustomer.setPostCode(customer.getPostCode());
         oldCustomer.setCity(customer.getCity());
         oldCustomer.setPhone(customer.getPhone());
-        oldCustomer.setPhone(customer.getPhone());
+        oldCustomer.setEmail(customer.getEmail());
         oldCustomer.setCountries(customer.getCountries());
 
         return customerRepo.save(oldCustomer);

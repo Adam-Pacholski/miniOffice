@@ -1,22 +1,12 @@
 package eu.adampacholski.miniOffice.customer;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import eu.adampacholski.miniOffice.countries.Countries;
-import eu.adampacholski.miniOffice.invoice.Invoice;
 import jakarta.persistence.*;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "Customer")
 @Table(name = "customer", uniqueConstraints = {
         @UniqueConstraint(name = "customer_name_uniq", columnNames = "name")
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Customer {
     @Id
     @SequenceGenerator(
@@ -59,13 +49,11 @@ public class Customer {
     private String city;
     @Column(
             name = "email",
-            nullable = true,
             columnDefinition = "TEXT"
     )
     private String email;
     @Column(
             name = "phone",
-            nullable = true,
             columnDefinition = "TEXT"
     )
     private String phone;
@@ -88,16 +76,6 @@ public class Customer {
     private Countries countries;
 
 
-    @OneToMany(
-           mappedBy = "customer",
-            cascade = CascadeType.PERSIST,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
-    )
-//    @JsonManagedReference
-    private List<Invoice> invoices;
-
-
     public Customer() {
     }
     public Customer(String name, String street, String postCode, String city, String email, String phone, String customerType) {
@@ -111,24 +89,6 @@ public class Customer {
         this.customerType = customerType;
     }
 
-    public Customer(String name, String street, String postCode, String city, String email, String phone, String customerType, Countries countries) {
-        this.name = name;
-        this.street = street;
-        this.postCode = postCode;
-        this.city = city;
-        this.email = email;
-        this.phone = phone;
-        this.customerType = customerType;
-        this.countries = countries;
-    }
-
-    public List<Invoice> getInvoices() {
-        return invoices;
-    }
-
-    public void setInvoices(List<Invoice> invoices) {
-        this.invoices = invoices;
-    }
 
     public Countries getCountries() {
         return countries;
@@ -214,7 +174,6 @@ public class Customer {
                 ", phone='" + phone + '\'' +
                 ", customerType='" + customerType + '\'' +
                 ", countries=" + countries +
-                ", invoices=" + invoices +
                 '}';
     }
 }
