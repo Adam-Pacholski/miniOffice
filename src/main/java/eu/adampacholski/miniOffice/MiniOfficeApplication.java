@@ -27,6 +27,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @SpringBootApplication
 
@@ -175,7 +176,8 @@ public class MiniOfficeApplication {
 			invoiceTypeRepo.save(in_type_3);
 			invoiceTypeRepo.save(in_type_4);
 
-			LocalDate data = LocalDate.now();
+			LocalDateTime data = LocalDateTime.now();
+
 
 			Invoice in_1 = new Invoice();
 			in_1.setInvoiceNumber("F/01/2024");

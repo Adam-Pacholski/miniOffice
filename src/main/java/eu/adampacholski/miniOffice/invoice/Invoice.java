@@ -10,6 +10,7 @@ import eu.adampacholski.miniOffice.invoice.productList.ProductList;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
@@ -49,20 +50,20 @@ public class Invoice {
     @Column(
             name = "rised_date",
 //            nullable = false,
-            columnDefinition = "date"
+            columnDefinition = "TIMESTAMP"
     )
-    private LocalDate risedDate;
+    private LocalDateTime risedDate;
     @Column(
             name = "termin_date",
 //            nullable = false,
-            columnDefinition = "date"
+            columnDefinition = "TIMESTAMP"
     )
-    private LocalDate terminDate;
+    private LocalDateTime terminDate;
     @Column(
             name = "paid_date",
-            columnDefinition = "date"
+            columnDefinition = "TIMESTAMP"
     )
-    private LocalDate paidDate;
+    private LocalDateTime paidDate;
     @Column(
             name = "comments",
             columnDefinition = "TEXT"
@@ -109,7 +110,7 @@ public class Invoice {
             foreignKey = @ForeignKey(name = "invoice_status_id_fr")
 //            nullable = false
     )
-    @JsonBackReference
+
     private InvoiceStatus invoiceStatus;
 
     @OneToMany(
@@ -129,7 +130,7 @@ public class Invoice {
     }
 
 
-    public Invoice(String invoiceNumber, LocalDate risedDate, LocalDate terminDate, LocalDate paidDate, String comments, Integer discount, InvoiceType invoiceType, Customer customer, InvoiceStatus invoiceStatus, List<ProductList> productLists) {
+    public Invoice(String invoiceNumber, LocalDateTime risedDate, LocalDateTime terminDate, LocalDateTime paidDate, String comments, Integer discount, InvoiceType invoiceType, Customer customer, InvoiceStatus invoiceStatus, List<ProductList> productLists) {
         this.invoiceNumber = invoiceNumber;
         this.risedDate = risedDate;
         this.terminDate = terminDate;
@@ -166,27 +167,27 @@ public class Invoice {
         this.invoiceNumber = invoiceNumber;
     }
 
-    public LocalDate getRisedDate() {
+    public LocalDateTime getRisedDate() {
         return risedDate;
     }
 
-    public void setRisedDate(LocalDate risedDate) {
+    public void setRisedDate(LocalDateTime risedDate) {
         this.risedDate = risedDate;
     }
 
-    public LocalDate getTerminDate() {
+    public LocalDateTime getTerminDate() {
         return terminDate;
     }
 
-    public void setTerminDate(LocalDate terminDate) {
+    public void setTerminDate(LocalDateTime terminDate) {
         this.terminDate = terminDate;
     }
 
-    public LocalDate getPaidDate() {
+    public LocalDateTime getPaidDate() {
         return paidDate;
     }
 
-    public void setPaidDate(LocalDate paidDate) {
+    public void setPaidDate(LocalDateTime paidDate) {
         this.paidDate = paidDate;
     }
 

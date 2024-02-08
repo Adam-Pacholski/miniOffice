@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,7 +32,7 @@ public class InvoiceService {
         return invoiceRepo.findAllByCommentsId(id, Sort.by(Sort.Direction.DESC, "id"));
     }
     public Invoice add(Invoice item, Integer days) {
-        LocalDate date = LocalDate.now();
+        LocalDateTime date = LocalDateTime.now();
         InvoiceNrSetting setting = null;
         Long typ= item.getInvoiceType().getId();
         if (typ == 1){
