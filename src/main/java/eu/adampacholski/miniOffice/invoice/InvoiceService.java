@@ -51,7 +51,7 @@ public class InvoiceService {
         item.setRisedDate(date);
         item.setTerminDate(date.plusDays(days));
         if (item.getInvoiceStatus().getId() == 1)
-            item.setPaidDate(date);
+            item.setPaidDate(LocalDate.now());
         if (setting.getYear() < date.getYear()) {
             setting.setYear(date.getYear());
             setting.setNumber(1);

@@ -49,13 +49,13 @@ public class Invoice {
 
     @Column(
             name = "rised_date",
-//            nullable = false,
+            nullable = false,
             columnDefinition = "TIMESTAMP"
     )
     private LocalDateTime risedDate;
     @Column(
             name = "termin_date",
-//            nullable = false,
+            nullable = false,
             columnDefinition = "TIMESTAMP"
     )
     private LocalDateTime terminDate;
@@ -63,7 +63,7 @@ public class Invoice {
             name = "paid_date",
             columnDefinition = "TIMESTAMP"
     )
-    private LocalDateTime paidDate;
+    private LocalDate paidDate;
     @Column(
             name = "comments",
             columnDefinition = "TEXT"
@@ -130,7 +130,7 @@ public class Invoice {
     }
 
 
-    public Invoice(String invoiceNumber, LocalDateTime risedDate, LocalDateTime terminDate, LocalDateTime paidDate, String comments, Integer discount, InvoiceType invoiceType, Customer customer, InvoiceStatus invoiceStatus, List<ProductList> productLists) {
+    public Invoice(String invoiceNumber, LocalDateTime risedDate, LocalDateTime terminDate, LocalDate paidDate, String comments, Integer discount, InvoiceType invoiceType, Customer customer, InvoiceStatus invoiceStatus, List<ProductList> productLists) {
         this.invoiceNumber = invoiceNumber;
         this.risedDate = risedDate;
         this.terminDate = terminDate;
@@ -183,11 +183,11 @@ public class Invoice {
         this.terminDate = terminDate;
     }
 
-    public LocalDateTime getPaidDate() {
+    public LocalDate getPaidDate() {
         return paidDate;
     }
 
-    public void setPaidDate(LocalDateTime paidDate) {
+    public void setPaidDate(LocalDate paidDate) {
         this.paidDate = paidDate;
     }
 
