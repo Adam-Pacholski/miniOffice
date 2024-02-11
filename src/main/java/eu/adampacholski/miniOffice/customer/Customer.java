@@ -89,6 +89,16 @@ public class Customer {
         this.customerType = customerType;
     }
 
+    public Customer(String name, String street, String postCode, String city, String email, String phone, String customerType, Countries countries) {
+        this.name = name;
+        this.street = street;
+        this.postCode = postCode;
+        this.city = city;
+        this.email = email;
+        this.phone = phone;
+        this.customerType = customerType;
+        this.countries = countries;
+    }
 
     public Countries getCountries() {
         return countries;

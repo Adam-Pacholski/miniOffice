@@ -201,11 +201,6 @@ public class MiniOfficeApplication {
 
 			invoiceRepo.save(in_2);
 
-//			System.out.println(data);
-//			LocalDate nowaData = data.plusDays(5);
-//			System.out.println(nowaData);
-//			Integer test = nowaData.getYear();
-//			System.out.println(test);
 		};
 	}
 }

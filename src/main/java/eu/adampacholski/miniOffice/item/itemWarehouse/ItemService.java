@@ -42,6 +42,7 @@ public class ItemService {
         Optional<Item> _item = itemRepo.findItemByPartNumberAndOntId(item.getPartNumber(), id);
         if (_item.isPresent())
             throw new NotFoundException("Podany przedmiot już istnieje");
+
         newItem.setPartNumber(item.getPartNumber());
         newItem.setName(item.getName());
         newItem.setDescription(item.getDescription());
