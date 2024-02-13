@@ -1,6 +1,5 @@
 package eu.adampacholski.miniOffice.invoice.productList;
 
-import eu.adampacholski.miniOffice.customer.Customer;
 import eu.adampacholski.miniOffice.invoice.Invoice;
 import eu.adampacholski.miniOffice.item.itemWarehouse.Item;
 import jakarta.persistence.*;
@@ -39,6 +38,12 @@ public class ProductList {
             nullable = false
     )
     private Integer margin; // marża
+    @Column(name = "price_netto")
+    private Double priceNetto;
+    @Column(name = "sum_netto")
+    private Double sumNetto;
+    @Column(name = "sum_brutto")
+    private Double sumBrutto;
     @Column(
             name = "description",
             columnDefinition = "TEXT"
@@ -62,11 +67,13 @@ public class ProductList {
     public ProductList() {
     }
 
-
-    public ProductList(Integer tax, Integer amount, Integer margin, String description, Invoice invoice, Item item) {
+    public ProductList(Integer tax, Integer amount, Integer margin, Double priceNetto, Double sumNetto, Double sumBrutto, String description, Invoice invoice, Item item) {
         this.tax = tax;
         this.amount = amount;
         this.margin = margin;
+        this.priceNetto = priceNetto;
+        this.sumNetto = sumNetto;
+        this.sumBrutto = sumBrutto;
         this.description = description;
         this.invoice = invoice;
         this.item = item;
@@ -128,6 +135,30 @@ public class ProductList {
         this.description = description;
     }
 
+    public Double getPriceNetto() {
+        return priceNetto;
+    }
+
+    public void setPriceNetto(Double priceNetto) {
+        this.priceNetto = priceNetto;
+    }
+
+    public Double getSumNetto() {
+        return sumNetto;
+    }
+
+    public void setSumNetto(Double sumNetto) {
+        this.sumNetto = sumNetto;
+    }
+
+    public Double getSumBrutto() {
+        return sumBrutto;
+    }
+
+    public void setSumBrutto(Double sumBrutto) {
+        this.sumBrutto = sumBrutto;
+    }
+
     @Override
     public String toString() {
         return "ProductList{" +
@@ -135,6 +166,9 @@ public class ProductList {
                 ", tax=" + tax +
                 ", amount=" + amount +
                 ", margin=" + margin +
+                ", priceNetto=" + priceNetto +
+                ", sumNetto=" + sumNetto +
+                ", sumBrutto=" + sumBrutto +
                 ", description='" + description + '\'' +
                 ", invoice=" + invoice +
                 ", item=" + item +
