@@ -39,7 +39,11 @@ public class ProductList {
             nullable = false
     )
     private Integer margin; // marża
-
+    @Column(
+            name = "description",
+            columnDefinition = "TEXT"
+    )
+    private String description; //opis
     @ManyToOne
     private Invoice invoice;
 
@@ -58,10 +62,12 @@ public class ProductList {
     public ProductList() {
     }
 
-    public ProductList(Integer tax, Integer amount, Integer margin, Item item, Invoice invoice) {
+
+    public ProductList(Integer tax, Integer amount, Integer margin, String description, Invoice invoice, Item item) {
         this.tax = tax;
         this.amount = amount;
         this.margin = margin;
+        this.description = description;
         this.invoice = invoice;
         this.item = item;
     }
@@ -114,6 +120,14 @@ public class ProductList {
         this.item = item;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "ProductList{" +
@@ -121,6 +135,7 @@ public class ProductList {
                 ", tax=" + tax +
                 ", amount=" + amount +
                 ", margin=" + margin +
+                ", description='" + description + '\'' +
                 ", invoice=" + invoice +
                 ", item=" + item +
                 '}';

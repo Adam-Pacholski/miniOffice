@@ -39,8 +39,7 @@ public class Item {
             columnDefinition = "TEXT"
     )
     private String description;
-    @Column(name = "price",
-            nullable = false)
+    @Column(name = "price")
     private Double price;
     @Column(name = "amount")
     private Integer amount;
@@ -52,8 +51,7 @@ public class Item {
     @JoinColumn(
             name = "item_cat_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "item_cat_id_fk"),
-            nullable = false
+            foreignKey = @ForeignKey(name = "item_cat_id_fk")
     )
     private ItemCategory itemCategory;
     @ManyToOne(
@@ -63,8 +61,7 @@ public class Item {
     @JoinColumn(
             name = "item_wh_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "item_wh_id_fk"),
-            nullable = false
+            foreignKey = @ForeignKey(name = "item_wh_id_fk")
     )
     private ItemWarehouse itemWarehouse;
     @ManyToOne(
@@ -74,8 +71,7 @@ public class Item {
     @JoinColumn(
             name = "item_unit_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "item_unit_id_fk"),
-            nullable = false
+            foreignKey = @ForeignKey(name = "item_unit_id_fk")
     )
     private ItemUnit itemUnit;
 

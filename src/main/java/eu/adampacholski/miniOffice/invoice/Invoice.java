@@ -42,7 +42,6 @@ public class Invoice {
 
     @Column(
             name = "invoice_number",
-//            nullable = false,
             columnDefinition = "TEXT"
     )
     private String invoiceNumber;
@@ -55,7 +54,6 @@ public class Invoice {
     private LocalDateTime risedDate;
     @Column(
             name = "termin_date",
-            nullable = false,
             columnDefinition = "TIMESTAMP"
     )
     private LocalDateTime terminDate;
