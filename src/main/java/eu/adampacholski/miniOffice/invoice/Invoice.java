@@ -1,6 +1,5 @@
 package eu.adampacholski.miniOffice.invoice;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import eu.adampacholski.miniOffice.customer.Customer;
