@@ -24,18 +24,15 @@ public class ProductList {
     private Long id;
 
     @Column(
-            name = "tax",
-            nullable = false
+            name = "tax"
     )
     private Integer tax; // podatek
     @Column(
-            name = "amount",
-            nullable = false
+            name = "amount"
     )
     private Integer amount; // ilość
     @Column(
-            name = "margin",
-            nullable = false
+            name = "margin"
     )
     private Integer margin; // marża
     @Column(name = "price_netto")
@@ -49,6 +46,11 @@ public class ProductList {
             columnDefinition = "TEXT"
     )
     private String description; //opis
+
+    @Column(
+            name = "discount"
+    )
+    private Integer discount;
     @ManyToOne
     private Invoice invoice;
 
@@ -67,7 +69,7 @@ public class ProductList {
     public ProductList() {
     }
 
-    public ProductList(Integer tax, Integer amount, Integer margin, Double priceNetto, Double sumNetto, Double sumBrutto, String description, Invoice invoice, Item item) {
+    public ProductList(Integer tax, Integer amount, Integer margin, Double priceNetto, Double sumNetto, Double sumBrutto, String description, Integer discount, Invoice invoice, Item item) {
         this.tax = tax;
         this.amount = amount;
         this.margin = margin;
@@ -75,6 +77,7 @@ public class ProductList {
         this.sumNetto = sumNetto;
         this.sumBrutto = sumBrutto;
         this.description = description;
+        this.discount = discount;
         this.invoice = invoice;
         this.item = item;
     }
@@ -159,6 +162,14 @@ public class ProductList {
         this.sumBrutto = sumBrutto;
     }
 
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
+
     @Override
     public String toString() {
         return "ProductList{" +
@@ -170,6 +181,7 @@ public class ProductList {
                 ", sumNetto=" + sumNetto +
                 ", sumBrutto=" + sumBrutto +
                 ", description='" + description + '\'' +
+                ", discount=" + discount +
                 ", invoice=" + invoice +
                 ", item=" + item +
                 '}';

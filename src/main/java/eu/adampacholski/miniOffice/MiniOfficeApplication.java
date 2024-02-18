@@ -127,7 +127,7 @@ public class MiniOfficeApplication {
 			itemUnitRepo.save(itemUnit2);
 			itemUnitRepo.save(itemUnit3);
 
-			Item item1 = new Item("02158965555", "Wkręty 4x35", "Wkręty o długości 35mm do drewna", 58.12,2);
+			Item item1 = new Item("02158965555", "Wkręty 4x35", "Wkręty o długości 35mm do drewna", 50.00,2);
 			Item item2 = new Item("021566465555", "Wkręty 4x40", "Wkręty o długości 40mm do drewna", 59.12,10);
 			Item item3 = new Item("11166465555", "Płyta 2800x2070 Biała", "Płyta wiurowa oklejana białą okleiną", 80.99,32);
 
@@ -182,7 +182,6 @@ public class MiniOfficeApplication {
 			Invoice in_1 = new Invoice();
 			in_1.setInvoiceNumber("F/01/2024");
 			in_1.setCustomer(customerRepo.findById(2L).get());
-			in_1.setDiscount(0);
 			in_1.setInvoiceStatus(invoiceStatusRepo.findById(2L).get());
 			in_1.setInvoiceType(invoiceTypeRepo.findById(1L).get());
 			in_1.setRisedDate(data);
@@ -193,7 +192,6 @@ public class MiniOfficeApplication {
 			Invoice in_2 = new Invoice();
 			in_2.setInvoiceNumber("F/02/2024");
 			in_2.setCustomer(customerRepo.findById(2L).get());
-			in_2.setDiscount(0);
 			in_2.setInvoiceStatus(invoiceStatusRepo.findById(1L).get());
 			in_2.setInvoiceType(invoiceTypeRepo.findById(1L).get());
 			in_2.setRisedDate(data);

@@ -67,10 +67,10 @@ public class Invoice {
     )
     private String comments;
 
-    @Column(
-            name = "discount"
-    )
-    private Integer discount;
+    @Column(name = "sum_netto")
+    private Double sumNetto;
+    @Column(name = "sum_brutto")
+    private Double sumBrutto;
 
     @ManyToOne(
             cascade = CascadeType.DETACH,
@@ -112,9 +112,9 @@ public class Invoice {
 
     @OneToMany(
 //            mappedBy = "invoice",
-            cascade = CascadeType.PERSIST,
-//            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
     )
     @JoinColumn(
             name = "invoice_id",
@@ -125,15 +125,14 @@ public class Invoice {
 
     public Invoice() {
     }
-
-
-    public Invoice(String invoiceNumber, LocalDateTime risedDate, LocalDateTime terminDate, LocalDate paidDate, String comments, Integer discount, InvoiceType invoiceType, Customer customer, InvoiceStatus invoiceStatus, List<ProductList> productLists) {
+    public Invoice(String invoiceNumber, LocalDateTime risedDate, LocalDateTime terminDate, LocalDate paidDate, String comments, Double sumNetto, Double sumBrutto, InvoiceType invoiceType, Customer customer, InvoiceStatus invoiceStatus, List<ProductList> productLists) {
         this.invoiceNumber = invoiceNumber;
         this.risedDate = risedDate;
         this.terminDate = terminDate;
         this.paidDate = paidDate;
         this.comments = comments;
-        this.discount = discount;
+        this.sumNetto = sumNetto;
+        this.sumBrutto = sumBrutto;
         this.invoiceType = invoiceType;
         this.customer = customer;
         this.invoiceStatus = invoiceStatus;
@@ -196,14 +195,6 @@ public class Invoice {
         this.comments = comments;
     }
 
-    public Integer getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Integer discount) {
-        this.discount = discount;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -228,6 +219,22 @@ public class Invoice {
         this.invoiceType = invoiceType;
     }
 
+    public Double getSumNetto() {
+        return sumNetto;
+    }
+
+    public void setSumNetto(Double sumNetto) {
+        this.sumNetto = sumNetto;
+    }
+
+    public Double getSumBrutto() {
+        return sumBrutto;
+    }
+
+    public void setSumBrutto(Double sumBrutto) {
+        this.sumBrutto = sumBrutto;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
@@ -237,7 +244,8 @@ public class Invoice {
                 ", terminDate=" + terminDate +
                 ", paidDate=" + paidDate +
                 ", comments='" + comments + '\'' +
-                ", discount=" + discount +
+                ", sumNetto=" + sumNetto +
+                ", sumBrutto=" + sumBrutto +
                 ", invoiceType=" + invoiceType +
                 ", customer=" + customer +
                 ", invoiceStatus=" + invoiceStatus +

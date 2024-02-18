@@ -32,6 +32,9 @@ public class InvoiceService {
         return invoiceRepo.findAllByCommentsId(id, Sort.by(Sort.Direction.DESC, "id"));
     }
     public Invoice add(Invoice item, Integer days) {
+
+
+
         LocalDateTime date = LocalDateTime.now();
         InvoiceNrSetting setting = null;
         Long typ= item.getInvoiceType().getId();
@@ -61,6 +64,7 @@ public class InvoiceService {
         String invNumber = item.getInvoiceType().getCode() + "/" + setting.getNumber() + "/" + setting.getYear();
         item.setInvoiceNumber(invNumber);
         setting.setNumber(setting.getNumber()+1);
+        System.out.println( item);
         return invoiceRepo.save(item);
     }
 }
