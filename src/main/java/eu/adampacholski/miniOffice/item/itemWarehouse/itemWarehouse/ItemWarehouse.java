@@ -29,12 +29,17 @@ public class ItemWarehouse {
     )
     private String name;
 
+@Column(
+        name = "warehouse_stat"
+)
+    private Integer warehouseStat;
 
     public ItemWarehouse() {
     }
 
-    public ItemWarehouse(String name) {
+    public ItemWarehouse(String name, Integer warehouseStat) {
         this.name = name;
+        this.warehouseStat = warehouseStat;
     }
 
     public Long getId() {
@@ -53,11 +58,20 @@ public class ItemWarehouse {
         this.name = name;
     }
 
+    public Integer getWarehouseStat() {
+        return warehouseStat;
+    }
+
+    public void setWarehouseStat(Integer warehouseStat) {
+        this.warehouseStat = warehouseStat;
+    }
+
     @Override
     public String toString() {
         return "ItemWarehouse{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", warehouseStat=" + warehouseStat +
                 '}';
     }
 }

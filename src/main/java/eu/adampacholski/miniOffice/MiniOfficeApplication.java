@@ -112,12 +112,14 @@ public class MiniOfficeApplication {
 			itemCategoryRepo.save(itemCategory3);
 
 			//Dodawanie 3 Item-warehouse
-			ItemWarehouse itemWarehouse1 = new ItemWarehouse("Warsztat");
-			ItemWarehouse itemWarehouse2 = new ItemWarehouse("Płytownia");
-			ItemWarehouse itemWarehouse3 = new ItemWarehouse("Półka z wkrętami");
+			ItemWarehouse itemWarehouse1 = new ItemWarehouse("Usługa", 0);
+			ItemWarehouse itemWarehouse2 = new ItemWarehouse("Produkt", 1);
+			ItemWarehouse itemWarehouse3 = new ItemWarehouse("Informacja",0);
+			ItemWarehouse itemWarehouse4 = new ItemWarehouse("Service", 0);
 			itemWarehouseRepo.save(itemWarehouse1);
 			itemWarehouseRepo.save(itemWarehouse2);
 			itemWarehouseRepo.save(itemWarehouse3);
+			itemWarehouseRepo.save(itemWarehouse4);
 
 			//Dodawanie 3 Item-unit
 			ItemUnit itemUnit1 = new ItemUnit("Szt");
