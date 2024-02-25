@@ -15,8 +15,8 @@ public class ProductListService {
     public ProductListService(ProductListRepo productListRepo) {
         this.productListRepo = productListRepo;
     }
+
     public List<ProductList> get() {
         return productListRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
-
 }

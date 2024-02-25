@@ -63,7 +63,7 @@ public class Item {
             referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "item_wh_id_fk")
     )
-    private ItemWarehouse itemWarehouse;
+    private ItemWarehouse itemType;
     @ManyToOne(
             cascade = CascadeType.DETACH,
             fetch = FetchType.EAGER
@@ -86,14 +86,14 @@ public class Item {
         this.amount = amount;
     }
 
-    public Item(String partNumber, String name, String description, Double price, Integer amount, ItemCategory itemCategory, ItemWarehouse itemWarehouse, ItemUnit itemUnit) {
+    public Item(String partNumber, String name, String description, Double price, Integer amount, ItemCategory itemCategory, ItemWarehouse itemType, ItemUnit itemUnit) {
         this.partNumber = partNumber;
         this.name = name;
         this.description = description;
         this.price = price;
         this.amount = amount;
         this.itemCategory = itemCategory;
-        this.itemWarehouse = itemWarehouse;
+        this.itemType = itemType;
         this.itemUnit = itemUnit;
     }
 
@@ -161,12 +161,12 @@ public class Item {
         this.itemCategory = itemCategory;
     }
 
-    public ItemWarehouse getItemWarehouse() {
-        return itemWarehouse;
+    public ItemWarehouse getItemType() {
+        return itemType;
     }
 
-    public void setItemWarehouse(ItemWarehouse itemWarehouse) {
-        this.itemWarehouse = itemWarehouse;
+    public void setItemType(ItemWarehouse itemWarehouse) {
+        this.itemType = itemWarehouse;
     }
 
     @Override
@@ -177,7 +177,7 @@ public class Item {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", itemCategory=" + itemCategory +
-                ", itemWarehouse=" + itemWarehouse +
+                ", itemWarehouse=" + itemType +
                 '}';
     }
 }

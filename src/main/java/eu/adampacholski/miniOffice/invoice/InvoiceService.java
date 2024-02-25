@@ -34,7 +34,6 @@ public class InvoiceService {
     public Invoice add(Invoice item, Integer days) {
 
 
-
         LocalDateTime date = LocalDateTime.now();
         InvoiceNrSetting setting = null;
         Long typ= item.getInvoiceType().getId();

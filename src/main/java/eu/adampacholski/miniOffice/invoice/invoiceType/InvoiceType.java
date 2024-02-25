@@ -25,7 +25,7 @@ public class InvoiceType {
             nullable = false,
             columnDefinition = "TEXT"
     )
-    private String inType;
+    private String type;
     @Column(
             name = "code",
             nullable = false,
@@ -37,7 +37,7 @@ public class InvoiceType {
     }
 
     public InvoiceType(String type, String code) {
-        this.inType = type;
+        this.type = type;
         this.code = code;
     }
 
@@ -50,11 +50,11 @@ public class InvoiceType {
     }
 
     public String getType() {
-        return inType;
+        return type;
     }
 
     public void setType(String type) {
-        this.inType = type;
+        this.type = type;
     }
 
     public String getCode() {
@@ -69,7 +69,7 @@ public class InvoiceType {
     public String toString() {
         return "InvoiceType{" +
                 "id=" + id +
-                ", type='" + inType + '\'' +
+                ", type='" + type + '\'' +
                 ", code='" + code + '\'' +
                 '}';
     }

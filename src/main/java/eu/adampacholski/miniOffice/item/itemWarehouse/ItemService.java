@@ -1,8 +1,6 @@
 package eu.adampacholski.miniOffice.item.itemWarehouse;
 
 import eu.adampacholski.miniOffice.Exception.NotFoundException;
-import eu.adampacholski.miniOffice.item.itemWarehouse.itemWarehouse.ItemWarehouse;
-import eu.adampacholski.miniOffice.item.itemWarehouse.itemWarehouse.ItemWarehouseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -49,7 +47,7 @@ public class ItemService {
         newItem.setPrice(item.getPrice());
         newItem.setAmount(item.getAmount());
         newItem.setItemCategory(item.getItemCategory());
-        newItem.setItemWarehouse(item.getItemWarehouse());
+        newItem.setItemType(item.getItemType());
         newItem.setItemUnit(item.getItemUnit());
 
         return itemRepo.save(newItem);

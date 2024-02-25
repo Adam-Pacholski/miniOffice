@@ -8,7 +8,6 @@ import eu.adampacholski.miniOffice.invoice.Invoice;
 import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSetting;
 import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSettingRepo;
 import eu.adampacholski.miniOffice.invoice.InvoiceRepo;
-import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSettingService;
 import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatus;
 import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatusRepo;
 import eu.adampacholski.miniOffice.invoice.invoiceType.InvoiceType;
@@ -26,7 +25,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @SpringBootApplication
@@ -103,7 +101,8 @@ public class MiniOfficeApplication {
 
 			//Dodawanie 3 Item-category
 
-			ItemCategory itemCategory1 = new ItemCategory("Płyty");
+			ItemCategory itemCategory1 = new ItemCategory("Usługi");
+			ItemCategory itemCategory4 = new ItemCategory("Płyty");
 			ItemCategory itemCategory2 = new ItemCategory("Wkręty");
 			ItemCategory itemCategory3 = new ItemCategory("Zawiasy");
 
@@ -133,9 +132,9 @@ public class MiniOfficeApplication {
 			Item item2 = new Item("021566465555", "Wkręty 4x40", "Wkręty o długości 40mm do drewna", 59.12,10);
 			Item item3 = new Item("11166465555", "Płyta 2800x2070 Biała", "Płyta wiurowa oklejana białą okleiną", 80.99,32);
 
-			item1.setItemWarehouse(itemWarehouseRepo.findById(3L).get());
-			item2.setItemWarehouse(itemWarehouseRepo.findById(3L).get());
-			item3.setItemWarehouse(itemWarehouseRepo.findById(2L).get());
+			item1.setItemType(itemWarehouseRepo.findById(3L).get());
+			item2.setItemType(itemWarehouseRepo.findById(3L).get());
+			item3.setItemType(itemWarehouseRepo.findById(2L).get());
 
 			item1.setItemCategory(itemCategoryRepo.findById(2L).get());
 			item2.setItemCategory(itemCategoryRepo.findById(2L).get());
@@ -183,11 +182,13 @@ public class MiniOfficeApplication {
 
 			Invoice in_1 = new Invoice();
 			in_1.setInvoiceNumber("F/01/2024");
+			in_1.setRisedDate( LocalDateTime.of(2024,1,1,12,1,1));
 			in_1.setCustomer(customerRepo.findById(2L).get());
 			in_1.setInvoiceStatus(invoiceStatusRepo.findById(2L).get());
 			in_1.setInvoiceType(invoiceTypeRepo.findById(1L).get());
-			in_1.setRisedDate(data);
-			in_1.setTerminDate(data.plusDays(14));
+//			in_1.setRisedDate(data);
+			in_1.setTerminDate(LocalDateTime.of(2024,1,1,12,1,1).plusDays(14));
+			in_1.setSumNetto(51.20);
 
 			invoiceRepo.save(in_1);
 
@@ -197,8 +198,8 @@ public class MiniOfficeApplication {
 			in_2.setInvoiceStatus(invoiceStatusRepo.findById(1L).get());
 			in_2.setInvoiceType(invoiceTypeRepo.findById(1L).get());
 			in_2.setRisedDate(data);
-			in_2.setTerminDate(data.plusDays(7));
-
+			in_2.setTerminDate(data.plusDays(50));
+			in_2.setSumNetto(31.32);
 			invoiceRepo.save(in_2);
 
 		};
