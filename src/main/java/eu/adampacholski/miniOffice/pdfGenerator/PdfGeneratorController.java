@@ -1,24 +1,22 @@
 package eu.adampacholski.miniOffice.pdfGenerator;
 
+import eu.adampacholski.miniOffice.invoice.Invoice;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @RestController
-@RequestMapping(path = "api/v1/pdf")
+@RequestMapping(path = "api/v1/invoice")
 public class PdfGeneratorController {
 
     @Autowired
     private PdfGeneratorService pdfGeneratorService;
 
-    @GetMapping()
-    public void generatePDF(HttpServletResponse response) throws IOException{
-
-        pdfGeneratorService.export(response);
+    @GetMapping(path = "/pdf/{id}")
+    public void generatePDF(HttpServletResponse response, @PathVariable("id") Integer id) throws IOException{
+        pdfGeneratorService.export(response, id);
     }
 
 }
