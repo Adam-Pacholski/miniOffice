@@ -51,7 +51,7 @@ public class CustomerService {
         oldCustomer.setPhone(customer.getPhone());
         oldCustomer.setEmail(customer.getEmail());
         oldCustomer.setCountries(customer.getCountries());
-
+        oldCustomer.setCustomerType(customer.getCustomerType());
         return customerRepo.save(oldCustomer);
     }
 

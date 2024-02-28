@@ -1,9 +1,16 @@
 package eu.adampacholski.miniOffice.invoice;
 
 
+import eu.adampacholski.miniOffice.customer.Customer;
 import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSetting;
 import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSettingRepo;
 import eu.adampacholski.miniOffice.invoice.invoiceType.InvoiceTypeRepo;
+import eu.adampacholski.miniOffice.invoice.productList.ProductList;
+import eu.adampacholski.miniOffice.invoice.productList.ProductListRepo;
+import eu.adampacholski.miniOffice.item.itemWarehouse.Item;
+import eu.adampacholski.miniOffice.item.itemWarehouse.ItemService;
+import eu.adampacholski.miniOffice.item.itemWarehouse.itemWarehouse.ItemWarehouseRepo;
+import eu.adampacholski.miniOffice.item.itemWarehouse.itemWarehouse.ItemWarehouseService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +23,18 @@ public class InvoiceService {
 
     private final InvoiceRepo invoiceRepo;
     private final InvoiceNrSettingRepo invoiceNrSettingRepo;
-    private final InvoiceTypeRepo invoiceTypeRepo;
+    private final ItemWarehouseService itemWarehouseService;
+    private final ItemService itemService;
+    private final ProductListRepo productListRepo;
 
-    public InvoiceService(InvoiceRepo invoiceRepo, InvoiceNrSettingRepo invoiceNrSettingRepo, InvoiceTypeRepo invoiceTypeRepo) {
+    public InvoiceService(InvoiceRepo invoiceRepo, InvoiceNrSettingRepo invoiceNrSettingRepo, ItemWarehouseService itemWarehouseService, ItemService itemService, ProductListRepo productListRepo) {
         this.invoiceRepo = invoiceRepo;
         this.invoiceNrSettingRepo = invoiceNrSettingRepo;
-        this.invoiceTypeRepo = invoiceTypeRepo;
-    }
+        this.itemWarehouseService = itemWarehouseService;
+        this.itemService = itemService;
 
+        this.productListRepo = productListRepo;
+    }
     public List<Invoice> get() {
         return invoiceRepo.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
@@ -31,8 +42,12 @@ public class InvoiceService {
     public List<Invoice> getAllByCustomerId(Long id){
         return invoiceRepo.findAllByCommentsId(id, Sort.by(Sort.Direction.DESC, "id"));
     }
-    public Invoice add(Invoice item, Integer days) {
 
+    public Invoice getById(Long id){
+        return invoiceRepo.findById(id).get();
+    }
+
+    public Invoice add(Invoice item, Integer days) {
 
         LocalDateTime date = LocalDateTime.now();
         InvoiceNrSetting setting = null;
@@ -63,7 +78,13 @@ public class InvoiceService {
         String invNumber = item.getInvoiceType().getCode() + "/" + setting.getNumber() + "/" + setting.getYear();
         item.setInvoiceNumber(invNumber);
         setting.setNumber(setting.getNumber()+1);
-        System.out.println( item);
+
+
+        for (int i = 0; i < item.getProductLists().size() ; i++) {
+            Item newItem = itemService.getById(item.getProductLists().get(i).getItem().getId());
+            newItem.setAmount(newItem.getAmount()-item.getProductLists().get(i).getAmount());
+            itemService.update(newItem, newItem.getId());
+        }
         return invoiceRepo.save(item);
     }
 }
