@@ -1,6 +1,7 @@
 package eu.adampacholski.miniOffice.invoice;
 
 
+import eu.adampacholski.miniOffice.customer.Customer;
 import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSetting;
 import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSettingRepo;
 import eu.adampacholski.miniOffice.invoice.invoiceType.InvoiceTypeRepo;
@@ -41,6 +42,11 @@ public class InvoiceService {
     public List<Invoice> getAllByCustomerId(Long id){
         return invoiceRepo.findAllByCommentsId(id, Sort.by(Sort.Direction.DESC, "id"));
     }
+
+    public Invoice getById(Long id){
+        return invoiceRepo.findById(id).get();
+    }
+
     public Invoice add(Invoice item, Integer days) {
 
         LocalDateTime date = LocalDateTime.now();

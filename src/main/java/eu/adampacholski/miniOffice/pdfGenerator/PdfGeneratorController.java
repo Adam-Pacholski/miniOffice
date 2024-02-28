@@ -15,7 +15,7 @@ public class PdfGeneratorController {
     private PdfGeneratorService pdfGeneratorService;
 
     @GetMapping(path = "/pdf/{id}")
-    public void generatePDF(HttpServletResponse response, @PathVariable("id") Integer id) throws IOException{
+    public void generatePDF(HttpServletResponse response, @PathVariable("id") Long id) throws IOException{
         pdfGeneratorService.export(response, id);
     }
 
