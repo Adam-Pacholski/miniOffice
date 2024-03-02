@@ -13,4 +13,7 @@ public interface InvoiceRepo extends JpaRepository<Invoice, Long> {
     @Query("SELECT s FROM Invoice s WHERE s.customer.id = ?1")
     List<Invoice> findAllByCommentsId(Long id, Sort sort);
 
+    @Query("SELECT SUM(m.sumNetto) FROM Invoice m")
+    Float selectTotal();
+
 }

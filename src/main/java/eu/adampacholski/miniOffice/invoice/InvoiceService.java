@@ -4,6 +4,8 @@ package eu.adampacholski.miniOffice.invoice;
 import eu.adampacholski.miniOffice.customer.Customer;
 import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSetting;
 import eu.adampacholski.miniOffice.invoice.invoiceNrSetting.InvoiceNrSettingRepo;
+import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatus;
+import eu.adampacholski.miniOffice.invoice.invoiceStatus.InvoiceStatusRepo;
 import eu.adampacholski.miniOffice.invoice.invoiceType.InvoiceTypeRepo;
 import eu.adampacholski.miniOffice.invoice.productList.ProductList;
 import eu.adampacholski.miniOffice.invoice.productList.ProductListRepo;
@@ -17,18 +19,21 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InvoiceService {
 
     private final InvoiceRepo invoiceRepo;
+    private final InvoiceStatusRepo invoiceStatusRepo;
     private final InvoiceNrSettingRepo invoiceNrSettingRepo;
     private final ItemWarehouseService itemWarehouseService;
     private final ItemService itemService;
     private final ProductListRepo productListRepo;
 
-    public InvoiceService(InvoiceRepo invoiceRepo, InvoiceNrSettingRepo invoiceNrSettingRepo, ItemWarehouseService itemWarehouseService, ItemService itemService, ProductListRepo productListRepo) {
+    public InvoiceService(InvoiceRepo invoiceRepo, InvoiceStatusRepo invoiceStatusRepo, InvoiceNrSettingRepo invoiceNrSettingRepo, ItemWarehouseService itemWarehouseService, ItemService itemService, ProductListRepo productListRepo) {
         this.invoiceRepo = invoiceRepo;
+        this.invoiceStatusRepo = invoiceStatusRepo;
         this.invoiceNrSettingRepo = invoiceNrSettingRepo;
         this.itemWarehouseService = itemWarehouseService;
         this.itemService = itemService;
@@ -37,6 +42,10 @@ public class InvoiceService {
     }
     public List<Invoice> get() {
         return invoiceRepo.findAll(Sort.by(Sort.Direction.DESC, "id"));
+    }
+
+    public Float getTotalSumNetto(){
+        return invoiceRepo.selectTotal();
     }
 
     public List<Invoice> getAllByCustomerId(Long id){
@@ -85,6 +94,13 @@ public class InvoiceService {
             newItem.setAmount(newItem.getAmount()-item.getProductLists().get(i).getAmount());
             itemService.update(newItem, newItem.getId());
         }
+        return invoiceRepo.save(item);
+    }
+
+    public Invoice setStat(Invoice invoice){
+       Invoice item = invoiceRepo.findById(invoice.getId()).get();
+        InvoiceStatus status = invoiceStatusRepo.findById(1L).get(); // status zapłacone
+        item.setInvoiceStatus(status);
         return invoiceRepo.save(item);
     }
 }

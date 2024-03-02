@@ -21,6 +21,12 @@ public class InvoiceController {
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
+    @GetMapping("/sum")
+    public ResponseEntity<Float> getSumNetto() {
+        Float items = invoiceService.getTotalSumNetto();
+        return new ResponseEntity<>(items, HttpStatus.OK);
+    }
+
     @GetMapping("/all/{id}")
     public ResponseEntity<List<Invoice>> getAllByCustomerId(
             @PathVariable("id") Long id
@@ -34,6 +40,14 @@ public class InvoiceController {
             @RequestBody Invoice item) {
 
         Invoice newItem = invoiceService.add(item,days);
+        return new ResponseEntity<>(newItem, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/setStat")
+    public ResponseEntity<Invoice> add(
+            @RequestBody Invoice item) {
+
+        Invoice newItem = invoiceService.setStat(item);
         return new ResponseEntity<>(newItem, HttpStatus.CREATED);
     }
 
